@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District</title>
+    <link rel="stylesheet"  href="district.component.css">
+</head>
+
+<body>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="parent">
+            <div class="child">
+                <div class="child1">
+                    <label for="district">District</label>
+                </div>
+
+                <div class="child2"><input class="childbtn1" type="text" formControlName="district" id="district"></div>
+                <div class="child2"><input class="childbtn1" type="text" formControlName="place" id="district"></div>
+                    
+                
+
+            </div>
+            <div class="child3"><button class="childbtn2" type="submit" >save</button></div>
+        </div>
+    </form>
+    district: {{this.var}}
+
+</body>
+
+</html>
