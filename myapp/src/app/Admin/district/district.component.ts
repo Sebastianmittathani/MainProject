@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import axios from 'axios';
+
+
+ interface DistrictInterface {
+  districtName: any;
+ }
+
 
 @Component({
   selector: 'app-district',
@@ -18,10 +25,19 @@ export class DistrictComponent {
   );
   var: any = ''
   onSubmit() {
-    console.log(this.profileForm.value.district);
-    console.log(this.profileForm.value.place);
-    this.var = this.profileForm.value.district;
+    // console.log(this.profileForm.value.district);
+    // console.log(this.profileForm.value.place);
+    const districtdata : DistrictInterface ={
+     districtName: this.profileForm.value.district,
 
-  }
+  };
+
+  axios.post('http://localhost:5000/addDistrict/',districtdata).then((response) => {
+    console.log(response.data);
+  })
+
+
 
 }
+}
+

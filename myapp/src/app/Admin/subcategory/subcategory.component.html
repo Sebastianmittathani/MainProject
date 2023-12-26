@@ -1,1 +1,17 @@
-<p>subcategory works!</p>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="parent">
+        <div class="child">
+            <div class="child1">
+                <label for="district">subcategory</label>
+            </div>
+
+            <div class="child2"><input class="childbtn1" type="text" formControlName="subcategory" id="subcategory"></div>
+            <!-- <div class="child2"><input class="childbtn1" type="text" formControlName="place" id="district"></div> -->
+                
+            
+
+        </div>
+        <div class="child3"><button class="childbtn2" type="submit" >save</button></div>
+    </div>
+</form>
+subcategory: {{this.var}}
