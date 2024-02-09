@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import axios from 'axios';
 
@@ -28,45 +28,18 @@ interface placefetch {
   templateUrl: './place.component.html',
   styleUrl: './place.component.css'
 })
-export class PlaceComponent {
+export class PlaceComponent implements OnInit {
 
   data: districtfetch[] = [];
   placedata: placefetch[] = [];
+  check: number = 0
 
-  deleteRow(index: number):void {
-    axios.delete(`http://localhost:5000/Place/${index}`).then((response) => {
-      console.log(response.data);
-      this.placefetch();
-  })
-}
 
-  ngOnInit() {
-    this.fetchdistrict(); 
-    this.placefetch();
-  }
-  fetchdistrict() {
-    axios.get('http://localhost:5000/District').then((response) => {
-      console.log(response.data.district);
-      
-      this.data = response.data.district
-      
-    })
-  }
-  placefetch() {
-    axios.get('http://localhost:5000/Place').then((response) => {
-      console.log(response.data.placedata);
-      
-      this.placedata = response.data.place
-      
-    })
-  }
 
   placeForm = new FormGroup(
     {
       place_name: new FormControl(''),
       district_id: new FormControl(''),
-
-
     }
   );
 
@@ -78,10 +51,80 @@ export class PlaceComponent {
       district_id: this.placeForm.value.district_id
     };
 
-    axios.post('http://localhost:5000/place/', placedata).then((response) => {
-      console.log(response.data);
+    if (this.check === 0) {
+      axios.post('http://localhost:5000/Place/', placedata).then((response) => {
+        // console.log(response.data);
+        alert(response.data.message)
+        this.placefetch();
+        this.placeForm.reset();
+      })
+
+    }
+    else {
+      axios.patch(`http://localhost:5000/Place/${this.check}`, placedata).then((response) => {
+        // console.log(response.data);
+        alert(response.data.message)
+        this.placefetch();
+        this.placeForm.reset();
+        this.check = 0
+      })
+
+    }
+
+
+  }
+  // getOnePlace(index: number): any {
+  //    console.log(index);
+    
+  //   axios.get(`http://localhost:5000/OnePlace/${index}`).then((response) => {
+  //     console.log(response.data.place[0].place_name)
+  //     this.placeForm.get('place_name')?.setValue(response.data.place[0].place_name);
+  //     this.placeForm.get('district_id')?.setValue(response.data.place[0].district_id);
+  //     this.check = index
+
+  //   })
+
+  // }
+  getOnePlace(index: number): any {
+    // console.log(index);
+    axios.get(`http://localhost:5000/OnePlace/${index}`).then((response) => {
+
+
+      // console.log(response.data.placeupdate[0].place_name)
+
+
+      this.placeForm.get('place_name')?.setValue(response.data.placeupdate[0].place_name);
+      this.placeForm.get('district_id')?.setValue(response.data.placeupdate[0].district_id);
+      this.check = index
+
     })
 
+  }
+  deleteRow(index: number):void {
+     // Remove the item at the specified index from the 'data' array
+    axios.delete(`http://localhost:5000/Place/${index}`).then((response) => {
+      // console.log(response.data);
+      this.placefetch();
+  })
+}
+
+  ngOnInit() {
+    this.fetchdistrict(); 
+    this.placefetch();
+  }
+  fetchdistrict() {
+    axios.get('http://localhost:5000/District').then((response) => {
+      // console.log(response.data.district);  
+      this.data = response.data.district 
+    })
+  }
+  placefetch() {
+    axios.get('http://localhost:5000/Place').then((response) => {
+      // console.log(response.data.placedata);
+      
+      this.placedata = response.data.place
+      
+    })
   }
 
 } 

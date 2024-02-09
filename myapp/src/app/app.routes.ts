@@ -30,7 +30,10 @@ export const routes: Routes = [
         path: 'Jail',
         component:JailcomponentComponent,
         children: [
-            
+            // {
+            //     path: 'productcategory',
+            //     component: ,
+            // },
             {
                 path: 'product',
                 component: ProductComponent,
@@ -67,11 +70,6 @@ export const routes: Routes = [
                 path: 'District',
                 component: DistrictComponent,
             },
-
-            // {
-            //     path: 'Product',
-            //     component: ProductComponent,
-            // },
             {
                 path: 'CentralJail',
                 component: CentraljailComponent,
@@ -80,14 +78,6 @@ export const routes: Routes = [
                 path: 'Place',
                 component: PlaceComponent,
             },
-            // {
-            //     path: 'Prisioner',
-            //     component: PrisonerComponent,
-            // },
-            // {
-            //     path:'Shop',
-            //     component:ShopComponent,
-            // },
 
 
 

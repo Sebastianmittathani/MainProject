@@ -30,22 +30,16 @@ export class DistrictComponent implements OnInit {
     axios.delete(`http://localhost:5000/District/${index}`).then((response) => {
       console.log(response.data);
       this.fetchdistrict();
-
-
-
     })
   }
 
 
   ngOnInit() {
     this.fetchdistrict();
-
-
   }
   fetchdistrict() {
     axios.get('http://localhost:5000/District').then((response) => {
       this.data = response.data.district
-
     })
   }
 
@@ -92,7 +86,7 @@ export class DistrictComponent implements OnInit {
   getOneDistrict(index: number): any {
     // console.log(index);
     
-    axios.get(`http://localhost:5000/OneDistrict/${index}`).then((response) => {
+    axios.get(`http://localhost:5000/oneDistrict/${index}`).then((response) => {
       console.log(response.data.district)
       this.profileForm.get('district')?.setValue(response.data.district[0].district_name);
       this.check = index

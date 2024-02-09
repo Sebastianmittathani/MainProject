@@ -177,7 +177,8 @@ app.delete("/District/:Id",(req, res) => {
 });
 
 
-app.get("/OneDistrict/:id", (req, res) => {
+app.get("/oneDistrict/:id", (req, res) => {
+  // console.log('hi');
   const Id = req.params.id
   console.log(Id);
   let qry = "select * from tbl_district  where district_id = " +Id;
@@ -194,8 +195,10 @@ app.get("/OneDistrict/:id", (req, res) => {
 });
 
 app.patch("/District/:Id", (req, res) => {
+  console.log(req);
   const id = req.params.Id
   const { districtName } = req.body
+  console.log(req.body);
   let qry = "update tbl_district set district_name = '"+districtName+"' where district_id = "+id ;
   connection.query(qry, (err, result) => {
     if (err) {
@@ -276,9 +279,9 @@ app.delete("/Place/:Id",(req, res) => {
 
 
 app.get("/OnePlace/:id", (req, res) => {
-  // console.log(req);
+  console.log(req);
   const Id = req.params.id
-  //  console.log(Id);
+   console.log(Id);
   let qry = "select * from tbl_place  where place_id = " +Id;
   console.log(qry);
   connection.query(qry, (err, result) => {
@@ -293,7 +296,7 @@ app.get("/OnePlace/:id", (req, res) => {
 });
 
 app.patch("/Place/:Id", (req, res) => {
-  // console.log(req);
+  console.log(req);
   const id = req.params.Id
   const { placeName,district_id } = req.body
   console.log(req.body);
