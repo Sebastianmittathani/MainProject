@@ -1,0 +1,22 @@
+.main-Container{
+    display: grid;
+    grid-template-areas: 'area2 area1 area1 area1 area1'
+                        'area2 area3 area3 area3 area3'
+                        'area2 area3 area3 area3 area3'
+                        'area2 area3 area3 area3 area3'
+                        'area2 area3 area3 area3 area3'
+                            ;
+}
+.navbar-box{
+    grid-area: area1;
+    height: 100px;
+}
+.sidebar-box{
+    grid-area: area2;
+}
+.content{
+    grid-area: area3;
+    display: flex;
+    justify-content: center;
+    
+}

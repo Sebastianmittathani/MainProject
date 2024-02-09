@@ -1,0 +1,13 @@
+.carousel-item active{
+    position: relative;
+    width: 211vh;
+    height: 108vh;
+}
+.carousel-item {
+    position: relative;
+    width: 211vh;
+    height: 108vh;
+}
+.carouselslide {
+    margin-top: -40px;
+}
