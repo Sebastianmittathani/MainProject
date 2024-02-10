@@ -669,6 +669,7 @@ app.patch("/Jail/:Id", (req, res) => {
 app.post("/Login", (req, res) => {
   let selAdmin = "select * from tbl_admin where admin_email='" + req.body.email + "' and admin_password='" + req.body.password + "'";
   let seljail = "select * from tbl_jail where jail_email='" + req.body.email + "' and jail_password='" + req.body.password + "'";
+  let selshop = "select * from tbl_shop where shop_email='" + req.body.email + "' and shop_password='" + req.body.password + "'";
 
 
   connection.query(selAdmin, (err, result) => {
@@ -695,8 +696,71 @@ app.post("/Login", (req, res) => {
       })
     }
   })
+  connection.query(selshop, (err, result) => {
+    if (err) {
+      console.log("Error");
+    }
+    else if (result.length > 0) {
+      res.send({
+        message: "Login Successful",
+        id: result[0].jail_id,
+        login: "shop"
+      })
+    }
+  })
 
 })
+
+
+
+// app.post("/login", (req, res) => {
+//   let selAdmin = "select * from tbl_admin where admin_email='" + req.body.email + "' and admin_password='" + req.body.password + "'";
+//   let selUser = "select * from tbl_user where user_email='" + req.body.email + "' and user_password='" + req.body.password + "'";
+//   let selvolunteer = "select * from tbl_volunteer where volunteer_email='" + req.body.email + "' and volunteer_password='" + req.body.password + "'";
+  
+  
+//   db.query(selAdmin, (err, result) => {
+//     if (err) {
+//       console.log("Error");
+//     }
+//     else if (result.length > 0) {
+//       res.send({
+//         message: "Login Successful",
+//         id: result[0].admin_id,
+//         login: "admin"
+//       })
+//     }
+//   })
+
+   
+//   db.query(selUser, (err, result) => {
+//     if (err) {
+//       console.log("Error");
+//     }
+//     else if (result.length > 0) {
+//       res.send({
+//         message: "Login Successful",
+//         id: result[0].user_id,
+//         login: "user"
+//       })
+//     }
+//   })
+ 
+
+   
+//   db.query(selvolunteer, (err, result) => {
+//     if (err) {
+//       console.log("Error");
+//     }
+//     else if (result.length > 0) {
+//       res.send({
+//         message: "Login Successful",
+//         id: result[0].volunteer_id,
+//         login: "volunteer"
+//       })
+//     }
+//   })
+// })
 // -------------------------------------------------------LOGINS ENDS HERE--------------------------------------------------------------
 
 // -------------------------------------------------PRISIONER REGISTRATION BEGINS HERE-------------------------------------------------

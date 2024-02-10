@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import axios from 'axios';
 
 interface loginInterface {
-   loginName: any;
-} 
+
+  email: any,
+  password: any
+}
 
 @Component({
   selector: 'app-login',
@@ -15,19 +18,45 @@ interface loginInterface {
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  profileForm = new FormGroup(
+  constructor(private router: Router) { }
+  loginForm = new FormGroup(
     {
-      login: new FormControl(''),
+      email: new FormControl(''),
+      password: new FormControl(''),
     }
   );
   var: any =''
   onSubmit() {
-    console.log(this.profileForm.value.login);
     const logindata: loginInterface = {
-      loginName: this.profileForm.value.login,
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
     };
     axios.post('http://localhost:5000/login/',logindata).then((response) => {
-      console.log(response.data);                                     
+      console.log(response.data); 
+      const { message, id, login } = response.data
+
+      if (login === "jail") {
+        sessionStorage.setItem("jid", id)
+
+        this.router.navigate(["/Jail"])
+      }
+      if (login === "shop") {
+        sessionStorage.setItem("sid", id)
+        this.router.navigate(["/Shop"])
+
+      }
+      if (login === "admin") {
+        sessionStorage.setItem("aid", id)
+        this.router.navigate(["/Admin"])
+
+
+      }
+      console.log(message);
+      console.log(id);
+      console.log(login);
+
+
+
     })
   }
 

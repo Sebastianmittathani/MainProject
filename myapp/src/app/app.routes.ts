@@ -30,10 +30,7 @@ export const routes: Routes = [
         path: 'Jail',
         component:JailcomponentComponent,
         children: [
-            // {
-            //     path: 'productcategory',
-            //     component: ,
-            // },
+            
             {
                 path: 'product',
                 component: ProductComponent,
