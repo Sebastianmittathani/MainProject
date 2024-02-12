@@ -11,6 +11,8 @@ import { RegisterComponent } from './Guest/register/register.component';
 import { ShopmainComponent } from './Shop/component/shopmain/shopmain.component';
 import { HomepageComponent } from './Shop/pages/homepage/homepage.component';
 import { JailcomponentComponent } from './Jail/component/jailcomponent/jailcomponent.component';
+import { MyprofileComponent } from './Jail/pages/myprofile/myprofile.component';
+import { ProductcategoryComponent } from './Jail/pages/productcategory/productcategory.component';
 
 
 export const routes: Routes = [
@@ -32,8 +34,17 @@ export const routes: Routes = [
         children: [
             
             {
+                path: 'category',
+                component: ProductcategoryComponent,
+            },
+            {
                 path: 'product',
                 component: ProductComponent,
+            },
+            {
+                path: 'myprofile',
+                component: MyprofileComponent,
+
             },
             {
                 path: 'prisioner',

@@ -1,10 +1,10 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="main">
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="main">
     <div class="card" style="width: 30rem;height: 17rem; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
   
       <div class="card-body" style="display:flex;gap: 10px;flex-direction: column; ">
         <div class="parent">
           <div class="head" style="margin-left: 100px;">
-            <p class="h3">  Product Caregory</p>
+            <p class="h3">  Product Category</p>
           </div>
   
   
@@ -12,10 +12,10 @@
           <div class="input-group flex-nowrap">
             <span class="input-group-text" id="addon-wrapping">Category </span>
             <input type="text" class="form-control w-90" placeholder="" aria-label="Username"
-              aria-describedby="addon-wrapping" formControlName="">
+              aria-describedby="addon-wrapping" formControlName="category">
           </div>
           <div class="child3">
-            <button type="button" class="btn btn-success">Add</button>
+            <button type="submit" class="btn btn-success">Add</button>
           </div>
   
   
@@ -23,52 +23,22 @@
       </div>
     </div>
     <div class="tablediv">
-      <!-- <table class="table ">
-          <thead>
-         
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of data;let i = index">
-              <th scope="row"></th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              
-              <th scope="row">{{ i + 1 }}</th>
-              <td>{{item.district_name}}</td>
-              <td><a href="javascript:void(0);" (click)="deleteRow(item.district_id)">Delete</a></td>
-            </tr>
-          </tbody>
-        </table> -->
       <table class="table">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">category</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td></td>
-            <!-- <td></td>
-              <td></td> -->
-          </tr>
-          <!-- <tr>
-              <th scope="row">2</th>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr> -->
+          <tr *ngFor="let item of data;let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ item.category_name }}</td>
+            <td><a href="javascript:void(0);" (click)="deleteRow(item.category_id)">Delete</a>
+              <a href="javascript:void(0);" (click)="updatecatgory(item.category_id)">Update</a>
+            </td>
+          </tr> 
         </tbody>
       </table>
     </div>

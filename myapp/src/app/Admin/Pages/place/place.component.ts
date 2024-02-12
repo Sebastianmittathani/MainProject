@@ -86,15 +86,15 @@ export class PlaceComponent implements OnInit {
 
   // }
   getOnePlace(index: number): any {
-    // console.log(index);
+    console.log(index);
     axios.get(`http://localhost:5000/OnePlace/${index}`).then((response) => {
 
 
-      // console.log(response.data.placeupdate[0].place_name)
+      console.log(response.data.place[0].place_name)
 
 
-      this.placeForm.get('place_name')?.setValue(response.data.placeupdate[0].place_name);
-      this.placeForm.get('district_id')?.setValue(response.data.placeupdate[0].district_id);
+      this.placeForm.get('place_name')?.setValue(response.data.place[0].place_name);
+      this.placeForm.get('district_id')?.setValue(response.data.place[0].district_id);
       this.check = index
 
     })

@@ -71,7 +71,8 @@ export class DistrictComponent implements OnInit {
 
     }
     else {
-      axios.patch(`http://localhost:5000/District/${this.check}, districtdata`).then((response) => {
+      
+      axios.patch(`http://localhost:5000/District/${this.check}`, districtdata).then((response) => {
         // console.log(response.data);
         alert(response.data.message)
         this.fetchdistrict();

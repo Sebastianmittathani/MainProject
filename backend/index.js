@@ -195,11 +195,11 @@ app.get("/oneDistrict/:id", (req, res) => {
 });
 
 app.patch("/District/:Id", (req, res) => {
-  console.log(req);
+  console.log(req.body);
   const id = req.params.Id
   const { districtName } = req.body
-  console.log(req.body);
   let qry = "update tbl_district set district_name = '" + districtName + "' where district_id = " + id;
+  console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("Error");
@@ -279,7 +279,6 @@ app.delete("/Place/:Id", (req, res) => {
 
 
 app.get("/OnePlace/:id", (req, res) => {
-  console.log(req);
   const Id = req.params.id
   console.log(Id);
   let qry = "select * from tbl_place  where place_id = " + Id;
@@ -289,7 +288,7 @@ app.get("/OnePlace/:id", (req, res) => {
       console.log("Error");
     } else {
       res.send({
-        district: result,
+        place: result,
       });
     }
   });
@@ -392,8 +391,9 @@ app.patch("/ShopRegister/:Id", (req, res) => {
 
 
 // ------------------------------------------------------------ CATEGORY BEGINS HERE---------------------------------------------------------
-app.post("/Category", (req, res) => {
+app.post("/category", (req, res) => {
   const { categoryname } = req.body
+  console.log(categoryname);
 
   let qry =
     "insert into tbl_category (category_name) values('" +
@@ -410,8 +410,9 @@ app.post("/Category", (req, res) => {
   });
 });
 
-app.get("/Category", (req, res) => {
-  let qry = "select * from tbl_category";
+app.get("/category", (req, res) => {
+  let qry = "SELECT * FROM tbl_category";
+  console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("error");
@@ -423,7 +424,7 @@ app.get("/Category", (req, res) => {
   });
 });
 
-app.delete("/Category/:Id", (req, res) => {
+app.delete("/category/:Id", (req, res) => {
   const Id = req.params.Id
   let qry = "delete from tbl_category where category_id = " + Id;
   connection.query(qry, (err, result) => {
@@ -438,9 +439,23 @@ app.delete("/Category/:Id", (req, res) => {
 });
 
 
+app.get("/updatecatgory/:id", (req, res) => {
+  const Id = req.params.id
+  console.log(Id);
+  let qry = "select * from tbl_category  where category_id = " + Id;
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        category: result,
+      });
+    }
+  });
+});
 
-
-app.patch("/Category/:Id", (req, res) => {
+app.patch("/category/:Id", (req, res) => {
   console.log(req);
   const id = req.params.Id
   const { categoryname } = req.body
@@ -463,12 +478,12 @@ app.patch("/Category/:Id", (req, res) => {
 
 // --------------------------------------------------PRODUCT BEGINS HERE------------------------------------------------------
 app.post("/Product", (req, res) => {
-  const { product_name, category_id, product_details, product_photo, product_description } = req.body
-  console.log(product_name, category_id, product_details, product_photo, product_description);
+  const { product_name, category_id, product_details, product_photo, product_rate,jail_id } = req.body
+  console.log(product_name, category_id, product_details, product_photo, product_rate,jail_id);
 
   let qry =
-    "insert into tbl_product (product_name ,category_id,product_details,product_photo,product_description) values('" +
-    product_name + "' , '" + category_id + "', '" + product_details + "', '" + product_photo + "', '" + product_description + "')";
+    "insert into tbl_product (product_name ,category_id,product_details,product_photo,product_rate,jail_id) values('" +
+    product_name + "' , '" + category_id + "', '" + product_details + "', '" + product_photo + "', '" + product_rate + "', '" + jail_id + "')";
 
 
   connection.query(qry, (err, result) => {
@@ -524,7 +539,7 @@ app.delete("/Product/:Id", (req, res) => {
 });
 
 
-app.get("/UpdateProduct/:id", (req, res) => {
+app.get("/updateproduct/:id", (req, res) => {
   console.log(req);
   const Id = req.params.id
   console.log(Id);
@@ -544,9 +559,9 @@ app.get("/UpdateProduct/:id", (req, res) => {
 app.patch("/Product/:Id", (req, res) => {
   console.log(req);
   const id = req.params.Id
-  const { product_name, category_id, product_details, product_description } = req.body
+  const { product_name, category_id, product_details, product_rate } = req.body
   console.log(req.body);
-  let qry = "update tbl_product set product_name = '" + product_name + "',product_details='" + product_details + "',product_description = '" + product_description + "', category_id ='" + category_id + "' where product_id = " + id;
+  let qry = "update tbl_product set product_name = '" + product_name + "',product_details='" + product_details + "',product_rate = '" + product_rate + "', category_id ='" + category_id + "' where product_id = " + id;
   console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {
