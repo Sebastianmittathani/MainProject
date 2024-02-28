@@ -318,19 +318,19 @@ app.patch("/Place/:Id", (req, res) => {
 // ----------------------------------------------------------SHOP REGISTRATION  BEGINS HERE-----------------------------------------------------------
 
 app.post("/ShopRegister",
-  // upload.fields([
-  //   { name: "shop_logo", maxCount: 1 },
-  // ]),
+   upload.fields([
+   { name: "shop_logo", maxCount: 1 },
+  ]),
   (req, res) => {
-    const { district_id, place_id, shop_name, shop_contact, shop_address, shop_email, shop_logo, shop_licenseproof, shop_ownername, shop_username, shop_password } = req.body
+    var fileValue = JSON.parse(JSON.stringify(req.files));
+    var photo = `http://127.0.0.1:${PORT}/images/${fileValue.shop_logo[0].filename}`;
+
+    const {  place_id, shop_name, shop_contact, shop_address, shop_email,  shop_licenseproof, shop_ownername, shop_username, shop_password,shop_status } = req.body
     console.log(req.body);
-    //  var fileValue = JSON.parse(JSON.stringify(req.files));
-    //  var photo = `http://127.0.0.1:${PORT}/images/${fileValue.shop_logo[0].filename}`;
+    
+      console.log(photo);
 
-    //  console.log(photo);
-
-    let qry = "insert into tbl_shop (district_id,place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password)values('" +
-      district_id + "','" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + shop_logo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "')";
+    let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password,shop_status)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "','" + shop_status + "')";
 
     console.log(qry);
     connection.query(qry, (err, result) => {
@@ -578,7 +578,7 @@ app.patch("/Product/:Id", (req, res) => {
 
 
 // ----------------------------------------------JAIL REGISTRATION BEGINS HERE------------------------------------------------------
-app.post("/Jail", (req, res) => {
+app.post("/CentralJail", (req, res) => {
   const { jail_name, district_id, jail_contact, jail_address, jail_email, jail_username, jail_password } = req.body
   console.log(jail_name, district_id, jail_contact, jail_address, jail_email, jail_username, jail_password);
 
@@ -599,7 +599,7 @@ app.post("/Jail", (req, res) => {
   });
 });
 
-app.get("/Jail", (req, res) => {
+app.get("/CentralJail", (req, res) => {
   let qry = "SELECT * FROM tbl_jail INNER JOIN tbl_district ON tbl_jail.district_id = tbl_district.district_id";
   connection.query(qry, (err, result) => {
     if (err) {
@@ -728,66 +728,19 @@ app.post("/Login", (req, res) => {
 
 
 
-// app.post("/login", (req, res) => {
-//   let selAdmin = "select * from tbl_admin where admin_email='" + req.body.email + "' and admin_password='" + req.body.password + "'";
-//   let selUser = "select * from tbl_user where user_email='" + req.body.email + "' and user_password='" + req.body.password + "'";
-//   let selvolunteer = "select * from tbl_volunteer where volunteer_email='" + req.body.email + "' and volunteer_password='" + req.body.password + "'";
-  
-  
-//   db.query(selAdmin, (err, result) => {
-//     if (err) {
-//       console.log("Error");
-//     }
-//     else if (result.length > 0) {
-//       res.send({
-//         message: "Login Successful",
-//         id: result[0].admin_id,
-//         login: "admin"
-//       })
-//     }
-//   })
 
-   
-//   db.query(selUser, (err, result) => {
-//     if (err) {
-//       console.log("Error");
-//     }
-//     else if (result.length > 0) {
-//       res.send({
-//         message: "Login Successful",
-//         id: result[0].user_id,
-//         login: "user"
-//       })
-//     }
-//   })
- 
-
-   
-//   db.query(selvolunteer, (err, result) => {
-//     if (err) {
-//       console.log("Error");
-//     }
-//     else if (result.length > 0) {
-//       res.send({
-//         message: "Login Successful",
-//         id: result[0].volunteer_id,
-//         login: "volunteer"
-//       })
-//     }
-//   })
-// })
 // -------------------------------------------------------LOGINS ENDS HERE--------------------------------------------------------------
 
 // -------------------------------------------------PRISIONER REGISTRATION BEGINS HERE-------------------------------------------------
 app.post("/Prisioner", (req, res) => {
   const { prisioner_name, jail_id, prisioner_gender, prisioner_address, prisioner_contact, prisioner_email, prisioner_photo, prisioner_code,
     prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate, prisioner_status } = req.body
-  console.log(prisioner_name, jail_id, prisioner_gender, prisioner_address, prisioner_contact, prisioner_email, prisioner_photo, prisioner_code,
-    prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate, prisioner_status);
+  // console.log(prisioner_name, jail_id, prisioner_gender, prisioner_address, prisioner_contact, prisioner_email, prisioner_photo, prisioner_code,
+  //   prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate, prisioner_status);
 
   let qry =
     "insert into tbl_prisioner (prisioner_name ,jail_id,prisioner_gender,prisioner_address,prisioner_contact,prisioner_email,prisioner_photo,prisioner_code,prisioner_crimedetails,prisioner_duration,prisioner_joindate,prisioner_releasedate,prisioner_status) values('"
-    + prisioner_name + "' , '"
+    + prisioner_name + "' ,'"
     + jail_id + "', '"
     + prisioner_gender + "', '"
     + prisioner_address + "', '"
@@ -800,6 +753,7 @@ app.post("/Prisioner", (req, res) => {
     + prisioner_joindate + "', '"
     + prisioner_releasedate + "', '"
     + prisioner_status + "')";
+    // console.log(qry);
 
 
   connection.query(qry, (err, result) => {
@@ -813,19 +767,19 @@ app.post("/Prisioner", (req, res) => {
   });
 });
 app.get("/Prisioner", (req, res) => {
-  let qry = "SELECT * FROM tbl_prisioner INNER JOIN tbl_jail ON tbl_prisioner.jail_id = tbl_jail.jail_id";
+  let qry = "SELECT * FROM tbl_prisioner";
+  console.log(res);
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("error");
     } else {
       res.send({
-        product: result,
+        prisioner: result,
       });
     }
   });
 });
-
-app.get("/Prisioner/:id", (req, res) => {
+app.get("/updateprisioner/:id", (req, res) => {
   const id = req.params.id
   let qry = "SELECT * FROM tbl_prisioner where jail_id =" + id;
   connection.query(qry, (err, result) => {
@@ -884,6 +838,90 @@ app.patch("/Prisioner/:Id", (req, res) => {
   });
 });
 // -------------------------------------------------PRISIONER REGISTRATION ENDS HERE-------------------------------------------------
+
+//  Jail fetch //
+app.get("/jailfetch/", (req, res) => {
+  let qry = "select * from tbl_jail"
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        jail: result,
+      });
+    }
+  });
+});
+
+
+app.get("/jailfetchbyId/:id", (req, res) => {
+  const Id = req.params.id
+  let qry = "select * from tbl_jail  where district_id = " + Id 
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        jaildatabyId: result,
+      });
+    }
+  });
+});
+
+//jail fetch//
+
+//myprofile//
+
+app.get("/myprofile/:jail_id", (req, res) => {
+  const jail_id = req.params.jail_id;
+  let qry = "select * from tbl_jail where jail_id = " + jail_id;
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        jail: result,
+      });
+    }
+  });
+});
+
+//myprofile//
+
+//product fetch//
+
+app.get("/fetchproduct/:id", (req, res) => {
+  let qry = "select * from tbl_product where jail_id =" +req.params.id
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        product: result,
+      });
+    }
+  });
+});
+
+app.get("/productfetchdataById/:id/:cid", (req, res) => {
+  const Id = req.params.id
+  const CId = req.params.cid
+  let qry = "select * from tbl_product  where category_id  = " + Id +" and jail_id = "+ CId
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        productdatabyId: result,
+      });
+    }
+  });
+});
+
+
+
+
+
 
 
 

@@ -1,0 +1,52 @@
+
+<div class="input-group ">
+
+    <span class="input-group-text" style="width: 131px;">District </span>
+    <select class="form-select" formControlName="district_id" id="inputGroupSelect01"
+    (change)="jailfetchdatabyID($event)">
+      <option selected>..district..</option>
+      <option [value]="item.district_id" *ngFor="let item of data">{{ item.district_name }}</option>
+
+    </select>
+  </div>
+  <!-- <div class="input-group ">
+    <span class="input-group-text" style="width: 131px;">Place </span>
+    <select class="form-select" formControlName="place_id" id="inputGroupSelect01"  (change)="jailfetchdatabyID($event)" >
+      <option selected>----</option>
+      <option [value]="item.place_id" *ngFor="let item of placedata">{{ item.place_name }}</option>
+
+
+    </select>
+  </div> -->
+
+<div class="tablediv">
+    <table class="table ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <!-- <th scope="col">District</th> -->
+                <th scope="col">jail name</th>
+                <th scope="col">contact</th>
+                <th scope="col">email</th>
+                <th scope="col">address</th>
+                <th scope="col">category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of jaildata;let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <!-- <td>{{ item.district_name }}</td> -->
+                <td>{{ item.jail_name }}</td>
+                <td>{{ item.jail_contact }}</td>
+                <td>{{ item.jail_email }}</td>
+                <td>{{ item.jail_address }}</td>
+                <td>
+                    <!-- <a routerLink="viewproduct" routerLinkActive="active" ariaCurrentWhenActive="page">view product</a> -->
+                    <a [routerLink]="['/Shop/viewproduct']" [queryParams]="{jail_id: item.jail_id}">
+                      view product
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

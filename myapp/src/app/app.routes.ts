@@ -13,6 +13,8 @@ import { HomepageComponent } from './Shop/pages/homepage/homepage.component';
 import { JailcomponentComponent } from './Jail/component/jailcomponent/jailcomponent.component';
 import { MyprofileComponent } from './Jail/pages/myprofile/myprofile.component';
 import { ProductcategoryComponent } from './Jail/pages/productcategory/productcategory.component';
+import { ViewjailComponent } from './Shop/pages/viewjail/viewjail.component';
+import { ViewproductComponent } from './Shop/pages/viewproduct/viewproduct.component';
 
 
 export const routes: Routes = [
@@ -23,6 +25,14 @@ export const routes: Routes = [
             {
                 path: 'home',
                 component: HomepageComponent,
+            },
+            {
+                path: 'viewjail',
+                component: ViewjailComponent,
+            },
+            {
+                path: 'viewproduct',
+                component: ViewproductComponent,
             },
             
 

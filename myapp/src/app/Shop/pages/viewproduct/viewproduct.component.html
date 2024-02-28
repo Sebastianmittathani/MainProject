@@ -1,0 +1,41 @@
+<div class="input-group ">
+
+    <span class="input-group-text" style="width: 131px;">category </span>
+    <select class="form-select" formControlName="category_id" id="inputGroupSelect01"
+    (change)="productfetchdataById($event)" >
+       
+        <option selected>..category..</option>
+        <option [value]="item.category_id" *ngFor="let item of categorydata">{{ item.category_name }}</option>
+
+    </select>
+</div>
+
+
+<div class="tablediv">
+    <table class="table ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"> name</th>
+                <th scope="col"> details</th>
+                <th scope="col">photo</th>
+                <th scope="col">rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productdata;let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.product_name }}</td>
+                <td>{{ item.product_details }}</td>
+                <td>{{ item.product_photo }}</td>
+                <td>{{ item.product_rate }}</td>
+                <!-- <td>  -->
+                    <!-- <a routerLink="viewproduct" routerLinkActive="active" ariaCurrentWhenActive="page">view product</a> -->
+                    <!-- <a [routerLink]="['/Shop/viewproduct']" [queryParams]="{msg: 'hi'}">
+                        link to user component
+                    </a> -->
+                <!-- </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div> 

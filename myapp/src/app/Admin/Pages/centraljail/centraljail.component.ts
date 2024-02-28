@@ -26,7 +26,8 @@ interface jailfetch {
   jail_contact: any,
   jail_address: any,
   jail_username: any,
-  jail_password: any
+  jail_password: any,
+  jail_email: any
 }
 @Component({
   selector: 'app-centraljail',
@@ -36,23 +37,23 @@ interface jailfetch {
   styleUrl: './centraljail.component.css'
 })
 export class CentraljailComponent {
-  districtdata: districtfetch[] = [];
+  data: districtfetch[] = [];
   jaildata: jailfetch[] = [];
 
 
   ngOnInit() {
-    this.fetchdistrict();
+    this.districtFetch();
     this.fetchjail();
   }
-  fetchdistrict() {
-    axios.get('http://localhost:5000/District').then((response) => {
-      // console.log(response.data.district);
-      this.districtdata = response.data.district
+  districtFetch() {
+    axios.get('http://localhost:5000/District/').then((response) => {
+      // console.log(response.data.district)
+      this.data = response.data.district
     })
   }
  
   fetchjail() {
-    axios.get('http://localhost:5000/Jail').then((response) => {
+    axios.get('http://localhost:5000/CentralJail').then((response) => {
       console.log(response.data.jaildata);
       this.jaildata = response.data.jail
     })
@@ -84,12 +85,20 @@ export class CentraljailComponent {
 
     };
 
-    axios.post('http://localhost:5000/Jail/', jaildata).then((response) => {
+    axios.post('http://localhost:5000/CentralJail/', jaildata).then((response) => {
       console.log(response.data);
+      alert(response.data.message)
     })
 
 
 
   }
+  deleteRow(index: number):void {
+    // Remove the item at the specified index from the 'data' array
+   axios.delete(`http://localhost:5000/CentralJail/${index}`).then((response) => {
+     // console.log(response.data);
+     this.fetchjail();
+ })
+}
 
 }
