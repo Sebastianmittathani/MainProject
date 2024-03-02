@@ -839,7 +839,7 @@ app.patch("/Prisioner/:Id", (req, res) => {
 });
 // -------------------------------------------------PRISIONER REGISTRATION ENDS HERE-------------------------------------------------
 
-//  Jail fetch //
+// ------------------------------------------------------- Jail fetch -----------------------------------------------------------------//
 app.get("/jailfetch/", (req, res) => {
   let qry = "select * from tbl_jail"
   connection.query(qry, (err, result) => {
@@ -870,7 +870,7 @@ app.get("/jailfetchbyId/:id", (req, res) => {
 
 //jail fetch//
 
-//myprofile//
+//----------------------------------------------------------myprofile---------------------------------------------------------------//
 
 app.get("/myprofile/:jail_id", (req, res) => {
   const jail_id = req.params.jail_id;
@@ -888,7 +888,7 @@ app.get("/myprofile/:jail_id", (req, res) => {
 
 //myprofile//
 
-//product fetch//
+//----------------------------------------------------product fetch---------------------------------------------------------//
 
 app.get("/fetchproduct/:id", (req, res) => {
   let qry = "select * from tbl_product where jail_id =" +req.params.id
