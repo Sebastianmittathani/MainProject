@@ -1,0 +1,44 @@
+
+<form [formGroup]="editprofile" (ngSubmit)="onSubmit()"
+    style="display: flex;align-items: center;justify-content: center;margin-top: 30px; ">
+
+    <div class="card" style="width: 30rem;height: auto;box-shadow: rgba(223, 52, 52, 0.35) 0px 5px 15px; ">
+
+        <div class="card-body" style="display:flex;gap: 10px;flex-direction: column ;">
+            <div class="head" style="margin-left: 60px;">
+                <p class="h3">Edit Profile</p>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-text">Jail Name</span>
+                <input type="text" formControlName="jail_name" aria-label="First name" class="form-control  ">
+
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 131px;">Jail Contact </span>
+                <input type="text" formControlName="jail_contact" aria-label="First name" class="form-control  ">
+
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 131px;">Jail Username </span>
+                <input type="text" formControlName="jail_username" aria-label="First name" class="form-control  ">
+
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" style="width: 131px;">Jail Address </span>
+                <input type="text" formControlName="jail_address" aria-label="First name" class="form-control  ">
+
+            </div>
+           
+         
+
+
+          
+            
+            <div class="child3" style="margin-left: 12rem;">
+                <button type="submit" class="btn btn-outline-success">Save</button>
+            </div>
+
+        </div>
+    </div>
+</form>

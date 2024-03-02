@@ -15,6 +15,12 @@ import { MyprofileComponent } from './Jail/pages/myprofile/myprofile.component';
 import { ProductcategoryComponent } from './Jail/pages/productcategory/productcategory.component';
 import { ViewjailComponent } from './Shop/pages/viewjail/viewjail.component';
 import { ViewproductComponent } from './Shop/pages/viewproduct/viewproduct.component';
+import { EditprofileComponent } from './Jail/pages/editprofile/editprofile.component';
+import { ChangepasswordComponent } from './Jail/pages/changepassword/changepassword.component';
+import { ShopmyProfileComponent } from './Shop/pages/shopmy-profile/shopmy-profile.component';
+import { ShopeditProfileComponent } from './Shop/pages/shopedit-profile/shopedit-profile.component';
+import { ShopchangepassComponent } from './Shop/pages/shopchangepass/shopchangepass.component';
+import { BuyproductComponent } from './Shop/pages/buyproduct/buyproduct.component';
 
 
 export const routes: Routes = [
@@ -27,6 +33,18 @@ export const routes: Routes = [
                 component: HomepageComponent,
             },
             {
+                path: 'shopmyProfile',
+                component: ShopmyProfileComponent,
+            },
+            {
+                path: 'shopeditProfile',
+                component: ShopeditProfileComponent,
+            },
+            {
+                path: 'shopchangepass',
+                component: ShopchangepassComponent,
+            },
+            {
                 path: 'viewjail',
                 component: ViewjailComponent,
             },
@@ -34,6 +52,11 @@ export const routes: Routes = [
                 path: 'viewproduct',
                 component: ViewproductComponent,
             },
+            {
+                path: 'buyproduct',
+                component: BuyproductComponent,
+            },
+            
             
 
         ]
@@ -55,6 +78,14 @@ export const routes: Routes = [
                 path: 'myprofile',
                 component: MyprofileComponent,
 
+            },
+            {
+                path: 'editprofile',
+                component: EditprofileComponent,
+            },
+            {
+                path: 'changepassword',
+                component: ChangepasswordComponent,
             },
             {
                 path: 'prisioner',

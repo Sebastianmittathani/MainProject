@@ -29,8 +29,25 @@
       </a>
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="v">My Profile</a>
+        <!-- <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profile
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div> -->
+        <li>
+          <a routerLink="shopmyProfile" routerLinkActive="active" ariaCurrentWhenActive="page">My Profile</a>
+        </li>
+        <li>
+          <a routerLink="shopeditProfile" routerLinkActive="active" ariaCurrentWhenActive="page">Edit Profile</a>
+        </li>
+        <li>
+          <a routerLink="shopchangepass" routerLinkActive="active" ariaCurrentWhenActive="page">Change Password</a>
         </li>
         <li>
           <a routerLink="viewjail" routerLinkActive="active" ariaCurrentWhenActive="page">jail</a>
@@ -39,6 +56,7 @@
           <a class="nav-link" href="#">Booking</a>
         </li>
       </ul>
+      
       <!-- Left links -->
     </div>
     <!-- Collapsible wrapper -->

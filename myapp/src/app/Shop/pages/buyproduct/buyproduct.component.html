@@ -1,0 +1,29 @@
+
+
+    <div class="tablediv">
+        <table class="table ">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Details</th>
+              <th scope="col">photo</th>
+              <th scope="col">Rate</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of productdata">
+              <td> {{productdata?.product_name}}</td> 
+              <td> {{productdata?.product_details}}</td>
+              <td> {{productdata?.product_photo}}</td>
+              <td> {{productdata?.product_rate}}</td> 
+              <td><input type="text" class="form-control w-90" placeholder="" aria-label="Qantity"
+                aria-describedby="addon-wrapping" ></td>
+              <td><input type="text" class="form-control w-90" placeholder="" aria-label="Amount"
+                aria-describedby="addon-wrapping" > </td>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>

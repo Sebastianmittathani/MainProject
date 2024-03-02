@@ -6,6 +6,7 @@ const cors = require("cors")
 const multer = require("multer")
 const mysql = require("mysql2");
 app.use(bodyParser.json());
+app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
@@ -318,17 +319,17 @@ app.patch("/Place/:Id", (req, res) => {
 // ----------------------------------------------------------SHOP REGISTRATION  BEGINS HERE-----------------------------------------------------------
 
 app.post("/ShopRegister",
-   upload.fields([
-   { name: "shop_logo", maxCount: 1 },
+  upload.fields([
+    { name: "shop_logo", maxCount: 1 },
   ]),
   (req, res) => {
     var fileValue = JSON.parse(JSON.stringify(req.files));
     var photo = `http://127.0.0.1:${PORT}/images/${fileValue.shop_logo[0].filename}`;
 
-    const {  place_id, shop_name, shop_contact, shop_address, shop_email,  shop_licenseproof, shop_ownername, shop_username, shop_password,shop_status } = req.body
+    const { place_id, shop_name, shop_contact, shop_address, shop_email, shop_licenseproof, shop_ownername, shop_username, shop_password, shop_status } = req.body
     console.log(req.body);
-    
-      console.log(photo);
+
+    console.log(photo);
 
     let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password,shop_status)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "','" + shop_status + "')";
 
@@ -478,8 +479,8 @@ app.patch("/category/:Id", (req, res) => {
 
 // --------------------------------------------------PRODUCT BEGINS HERE------------------------------------------------------
 app.post("/Product", (req, res) => {
-  const { product_name, category_id, product_details, product_photo, product_rate,jail_id } = req.body
-  console.log(product_name, category_id, product_details, product_photo, product_rate,jail_id);
+  const { product_name, category_id, product_details, product_photo, product_rate, jail_id } = req.body
+  console.log(product_name, category_id, product_details, product_photo, product_rate, jail_id);
 
   let qry =
     "insert into tbl_product (product_name ,category_id,product_details,product_photo,product_rate,jail_id) values('" +
@@ -599,7 +600,8 @@ app.post("/CentralJail", (req, res) => {
   });
 });
 
-app.get("/CentralJail", (req, res) => {
+app.get("/CentralJail/:Id", (req, res) => {
+  const Id = req.params.Id
   let qry = "SELECT * FROM tbl_jail INNER JOIN tbl_district ON tbl_jail.district_id = tbl_district.district_id";
   connection.query(qry, (err, result) => {
     if (err) {
@@ -612,19 +614,7 @@ app.get("/CentralJail", (req, res) => {
   });
 });
 
-app.get("/Product/:id", (req, res) => {
-  const id = req.params.id
-  let qry = "SELECT * FROM tbl_product where category_id =" + id;
-  connection.query(qry, (err, result) => {
-    if (err) {
-      console.log("error");
-    } else {
-      res.send({
-        product: result,
-      });
-    }
-  });
-});
+
 
 app.delete("/Jail/:Id", (req, res) => {
   const Id = req.params.Id
@@ -641,42 +631,45 @@ app.delete("/Jail/:Id", (req, res) => {
 });
 
 
-app.get("/UpdateJail/:id", (req, res) => {
-  console.log(req);
-  const Id = req.params.id
-  console.log(Id);
-  let qry = "select * from tbl_product  where product_id = " + Id;
-  console.log(qry);
-  connection.query(qry, (err, result) => {
-    if (err) {
-      console.log("Error");
-    } else {
-      res.send({
-        product: result,
-      });
-    }
-  });
-});
+// app.get("/UpdateJail/:id", (req, res) => {
+//   console.log(req);
+//   const Id = req.params.id
+//   console.log(Id);
+//   let qry = "select * from tbl_product  where product_id = " + Id;
+//   console.log(qry);
+//   connection.query(qry, (err, result) => {
+//     if (err) {
+//       console.log("Error");
+//     } else {
+//       res.send({
+//         product: result,
+//       });
+//     }
+//   });
+// });
 
-app.patch("/Jail/:Id", (req, res) => {
-  console.log(req);
-  const id = req.params.Id
-  const { jail_name, jail_contact, jail_address, jail_username, jail_password } = req.body
-  console.log(req.body);
-  let qry = "update tbl_jail set jail_name = '" + jail_name + "',jail_contact='" + jail_contact + "',jail_address = '" + jail_address + "', jail_username ='" + jail_username + "', jail_password ='" + jail_password + "' where jail_id = " + id;
+// app.patch("/Jail/:Id", (req, res) => {
+//   console.log(req);
+//   const id = req.params.Id
+//   const { jail_name, jail_contact, jail_address, jail_username, jail_password } = req.body
+//   console.log(req.body);
+//   let qry = "update tbl_jail set jail_name = '" + jail_name + "',jail_contact='" + jail_contact + "',jail_address = '" + jail_address + "', jail_username ='" + jail_username + "', jail_password ='" + jail_password + "' where jail_id = " + id;
 
-  // let qry = "update tbl_jail set jail_name = '"+jail_name+"',jail_contact='"+ jail_contact+"', jail_address = '"+ jail_address+",jail_username = '"+ jail_username+"', jail_password = '"+ jail_password+"' where jail_id = "+id ;
-  console.log(qry);
-  connection.query(qry, (err, result) => {
-    if (err) {
-      console.log("Error");
-    } else {
-      res.send({
-        message: "Data updated",
-      });
-    }
-  });
-});
+//   // let qry = "update tbl_jail set jail_name = '"+jail_name+"',jail_contact='"+ jail_contact+"', jail_address = '"+ jail_address+",jail_username = '"+ jail_username+"', jail_password = '"+ jail_password+"' where jail_id = "+id ;
+//   console.log(qry);
+//   connection.query(qry, (err, result) => {
+//     if (err) {
+//       console.log("Error");
+//     } else {
+//       res.send({
+//         message: "Data updated",
+//       });
+//     }
+//   });
+// });
+
+
+
 // ---------------------------------------------------------JAIL REGISTRATION ENDE HERE------------------------------------------------------
 
 
@@ -718,7 +711,7 @@ app.post("/Login", (req, res) => {
     else if (result.length > 0) {
       res.send({
         message: "Login Successful",
-        id: result[0].jail_id,
+        id: result[0].shop_id,
         login: "shop"
       })
     }
@@ -753,7 +746,7 @@ app.post("/Prisioner", (req, res) => {
     + prisioner_joindate + "', '"
     + prisioner_releasedate + "', '"
     + prisioner_status + "')";
-    // console.log(qry);
+  // console.log(qry);
 
 
   connection.query(qry, (err, result) => {
@@ -810,21 +803,21 @@ app.delete("/Prisioner/:Id", (req, res) => {
 app.patch("/Prisioner/:Id", (req, res) => {
   console.log(req);
   const id = req.params.Id
-  const {  prisioner_name, prisioner_gender, prisioner_address, prisioner_contact,  prisioner_photo, prisioner_code,
-    prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate, prisioner_status  } = req.body
+  const { prisioner_name, prisioner_gender, prisioner_address, prisioner_contact, prisioner_photo, prisioner_code,
+    prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate, prisioner_status } = req.body
   console.log(req.body);
-  let qry = "update tbl_prisioner set prisioner_name = '"+ prisioner_name +
-   "',prisioner_gender='" + prisioner_gender +
+  let qry = "update tbl_prisioner set prisioner_name = '" + prisioner_name +
+    "',prisioner_gender='" + prisioner_gender +
     "',prisioner_address = '" + prisioner_address +
-     "', prisioner_contact ='" + prisioner_contact +
-     "', prisioner_photo ='" + prisioner_photo +
-     "', prisioner_code ='" + prisioner_code +
-     "', prisioner_crimedetails ='" + prisioner_crimedetails +
-     "', prisioner_duration ='" + prisioner_duration +
-     "', prisioner_joindate ='" + prisioner_joindate +
-     "', prisioner_releasedate ='" + prisioner_releasedate +
+    "', prisioner_contact ='" + prisioner_contact +
+    "', prisioner_photo ='" + prisioner_photo +
+    "', prisioner_code ='" + prisioner_code +
+    "', prisioner_crimedetails ='" + prisioner_crimedetails +
+    "', prisioner_duration ='" + prisioner_duration +
+    "', prisioner_joindate ='" + prisioner_joindate +
+    "', prisioner_releasedate ='" + prisioner_releasedate +
 
-      "', prisioner_status ='" + prisioner_status + "' where prisioner_id = " + id;
+    "', prisioner_status ='" + prisioner_status + "' where prisioner_id = " + id;
 
   console.log(qry);
   connection.query(qry, (err, result) => {
@@ -856,7 +849,7 @@ app.get("/jailfetch/", (req, res) => {
 
 app.get("/jailfetchbyId/:id", (req, res) => {
   const Id = req.params.id
-  let qry = "select * from tbl_jail  where district_id = " + Id 
+  let qry = "select * from tbl_jail  where district_id = " + Id
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("Error");
@@ -870,7 +863,7 @@ app.get("/jailfetchbyId/:id", (req, res) => {
 
 //jail fetch//
 
-//----------------------------------------------------------myprofile---------------------------------------------------------------//
+//----------------------------------------jail  myprofile ---------------------------------------------------------------//
 
 app.get("/myprofile/:jail_id", (req, res) => {
   const jail_id = req.params.jail_id;
@@ -886,12 +879,72 @@ app.get("/myprofile/:jail_id", (req, res) => {
   });
 });
 
-//myprofile//
+// jail myprofile//
+
+//jail edit profile//
+
+app.get("/getjail/:jail_id", (req, res) => {
+  const jail_id = req.params.jail_id;
+  let qry = "select * from tbl_jail where jail_id = " + jail_id;
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("error");
+    } else {
+      res.send({
+        jail: result,
+      });
+    }
+  });
+});
+
+app.patch("/editjail/:Id", (req, res) => {
+  const id = req.params.Id;
+  // console.log(res);
+  const { jail_name, jail_contact, jail_username, jail_address } = req.body;
+  let qry = "update tbl_jail set jail_name ='" + jail_name + "', jail_contact ='" + jail_contact + "',jail_username='" + jail_username + "',jail_address = '" + jail_address + "' where jail_id = " + id;
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data updated",
+      });
+    }
+  });
+});
+
+
+//jail edit profile//
+
+
+
+// Jail Change Password//
+
+app.patch("/changepass/:id", (req, res) => {
+  let id = req.params.id;
+  let qry = "update tbl_jail set jail_password ='" + req.body.newuser_password + "' where jail_id=" + id;
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "updated",
+      });
+    }
+  });
+});
+
+// Jail Change Password//
+
+
+
 
 //----------------------------------------------------product fetch---------------------------------------------------------//
 
 app.get("/fetchproduct/:id", (req, res) => {
-  let qry = "select * from tbl_product where jail_id =" +req.params.id
+  let qry = "select * from tbl_product where jail_id =" + req.params.id
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("Error");
@@ -903,10 +956,11 @@ app.get("/fetchproduct/:id", (req, res) => {
   });
 });
 
-app.get("/productfetchdataById/:id/:cid", (req, res) => {
+app.get("/productfetchdataById/:cid/:id", (req, res) => {
   const Id = req.params.id
   const CId = req.params.cid
-  let qry = "select * from tbl_product  where category_id  = " + Id +" and jail_id = "+ CId
+  let qry = "select * from tbl_product  where category_id  = " +  CId + " and jail_id = " +Id
+  console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("Error");
@@ -917,7 +971,107 @@ app.get("/productfetchdataById/:id/:cid", (req, res) => {
     }
   });
 });
+// product fetch//
 
+//shop myProfile //
+
+app.get("/shopmyprofile/:shop_id", (req, res) => {
+  const shop_id = req.params.shop_id;
+  console.log(shop_id);
+  let qry = "select * from tbl_shop where shop_id = " + shop_id;
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("error");
+    } else {
+      res.send({
+        shop: result,
+      });
+    }
+  });
+});
+
+
+
+//shop myProfile//
+
+//shop editProfile//
+app.get("/getshop/:shop_id", (req, res) => {
+  const shop_id = req.params.shop_id;
+  let qry = "select * from tbl_shop where shop_id = " + shop_id;
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("error");
+    } else {
+      res.send({
+        shop: result,
+      });
+    }
+  });
+});
+
+app.patch("/editshop/:Id", (req, res) => {
+  const id = req.params.Id;
+  // console.log(res);
+  const { shop_name, shop_contact, shop_address, shop_email ,shop_licenseproof,shop_ownername,shop_username,shop_status} = req.body;
+  let qry = "update tbl_shop set shop_name ='" + shop_name + "', shop_contact ='" + shop_contact + "',shop_address='"
+   + shop_address + 
+   "',shop_licenseproof = '" + shop_licenseproof +
+   "',shop_ownername = '" + shop_ownername +
+   "',shop_username = '" + shop_username +
+   "',shop_status = '" + shop_status +
+   "',shop_email = '" + shop_email +
+    "' where shop_id = " + id;
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data updated",
+      });
+    }
+  });
+});
+
+//shop editProfile//
+
+//shop changePassword//
+
+app.patch("/shopchangepass/:id", (req, res) => {
+  let id = req.params.id;
+  let qry = "update tbl_shop set shop_password ='" + req.body.newshop_password + "' where shop_id=" + id;
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "updated",
+      });
+    }
+  });
+});
+
+//shop changePassword//
+
+// product booking//
+
+
+app.get("/bookproduct/:id", (req, res) => {
+  const id = req.params.id;
+  let qry = "select * from tbl_product where product_id = " + id  
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        product: result,
+      });
+    }
+  });
+});
+
+// product booking//
 
 
 

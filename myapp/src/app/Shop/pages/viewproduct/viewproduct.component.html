@@ -20,6 +20,7 @@
                 <th scope="col"> details</th>
                 <th scope="col">photo</th>
                 <th scope="col">rate</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -29,12 +30,12 @@
                 <td>{{ item.product_details }}</td>
                 <td>{{ item.product_photo }}</td>
                 <td>{{ item.product_rate }}</td>
-                <!-- <td>  -->
+                <td>
                     <!-- <a routerLink="viewproduct" routerLinkActive="active" ariaCurrentWhenActive="page">view product</a> -->
-                    <!-- <a [routerLink]="['/Shop/viewproduct']" [queryParams]="{msg: 'hi'}">
-                        link to user component
-                    </a> -->
-                <!-- </td> -->
+                    <a [routerLink]="['/Shop/buyproduct']" [queryParams]="{product_id: item.product_id}">
+                      buy product
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>

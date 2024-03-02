@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import axios from 'axios';
 
 interface fetchcategory {
@@ -14,12 +14,13 @@ interface fetchproduct {
   product_details: any,
   product_photo: any,
   product_rate: any,
+  product_id: any
 }
 
 @Component({
   selector: 'app-viewproduct',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink,RouterLinkActive],
   templateUrl: './viewproduct.component.html',
   styleUrl: './viewproduct.component.css'
 })
@@ -42,23 +43,24 @@ ngOnInit() {
 }
 fetchcategory() {
   axios.get('http://localhost:5000/category/').then((response) => {
-    console.log(response.data.fetchcategory)
+    // console.log(response.data.fetchcategory)
     this.categorydata = response.data.category
   })
 }
 fetchproduct() {
   axios.get('http://localhost:5000/fetchproduct/'+this.jailId).then((response) => {
-    console.log(response.data.product);
+    // console.log(response.data.product);
     this.productdata = response.data.product
   })
 }
+
 productfetchdataById(event:any) {
   const selectedproductId = event.target.value;
 
   axios.get(`http://localhost:5000/productfetchdataById/${selectedproductId}/${this.jailId}`).then((response) => {
     console.log(response.data)
 
-    // this.productdata = response.data.productfetchdataById
+    this.productdata = response.data.productdatabyId
     
 
 
