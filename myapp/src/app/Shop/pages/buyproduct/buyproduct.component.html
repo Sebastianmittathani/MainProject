@@ -1,3 +1,4 @@
+<form [formGroup]="bookForm" class="main">
 
 
     <div class="tablediv">
@@ -10,20 +11,27 @@
               <th scope="col">Rate</th>
               <th scope="col">Quantity</th>
               <th scope="col">Amount</th>
+              <th scope="col"> Date</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let product of productdata">
-              <td> {{productdata?.product_name}}</td> 
-              <td> {{productdata?.product_details}}</td>
-              <td> {{productdata?.product_photo}}</td>
-              <td> {{productdata?.product_rate}}</td> 
+            <tr >
+              <td> {{productdata.product_name}}</td> 
+              <td> {{productdata.product_details}}</td>
+              <td> {{productdata.product_photo}}</td>
+              <td> {{productdata.product_rate}}</td> 
               <td><input type="text" class="form-control w-90" placeholder="" aria-label="Qantity"
-                aria-describedby="addon-wrapping" ></td>
+                aria-describedby="addon-wrapping"  formControlName="booking_qty"></td>
               <td><input type="text" class="form-control w-90" placeholder="" aria-label="Amount"
-                aria-describedby="addon-wrapping" > </td>
+                aria-describedby="addon-wrapping" formControlName="booking_amount" > </td>
+                <td><input type="text" class="form-control w-90" placeholder="" aria-label="date"
+                    aria-describedby="addon-wrapping"  formControlName="booking_foredate"></td>
+                <td><button type="submit" class="btn btn-success"(click)="book(productdata.product_id)">book now</button></td>
               
             </tr>
+         
+            
           </tbody>
         </table>
       </div>
+</form>

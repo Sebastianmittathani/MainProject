@@ -631,42 +631,6 @@ app.delete("/Jail/:Id", (req, res) => {
 });
 
 
-// app.get("/UpdateJail/:id", (req, res) => {
-//   console.log(req);
-//   const Id = req.params.id
-//   console.log(Id);
-//   let qry = "select * from tbl_product  where product_id = " + Id;
-//   console.log(qry);
-//   connection.query(qry, (err, result) => {
-//     if (err) {
-//       console.log("Error");
-//     } else {
-//       res.send({
-//         product: result,
-//       });
-//     }
-//   });
-// });
-
-// app.patch("/Jail/:Id", (req, res) => {
-//   console.log(req);
-//   const id = req.params.Id
-//   const { jail_name, jail_contact, jail_address, jail_username, jail_password } = req.body
-//   console.log(req.body);
-//   let qry = "update tbl_jail set jail_name = '" + jail_name + "',jail_contact='" + jail_contact + "',jail_address = '" + jail_address + "', jail_username ='" + jail_username + "', jail_password ='" + jail_password + "' where jail_id = " + id;
-
-//   // let qry = "update tbl_jail set jail_name = '"+jail_name+"',jail_contact='"+ jail_contact+"', jail_address = '"+ jail_address+",jail_username = '"+ jail_username+"', jail_password = '"+ jail_password+"' where jail_id = "+id ;
-//   console.log(qry);
-//   connection.query(qry, (err, result) => {
-//     if (err) {
-//       console.log("Error");
-//     } else {
-//       res.send({
-//         message: "Data updated",
-//       });
-//     }
-//   });
-// });
 
 
 
@@ -1060,10 +1024,12 @@ app.patch("/shopchangepass/:id", (req, res) => {
 app.get("/bookproduct/:id", (req, res) => {
   const id = req.params.id;
   let qry = "select * from tbl_product where product_id = " + id  
+  console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("Error");
     } else {
+      console.log(result);
       res.send({
         product: result,
       });
@@ -1072,6 +1038,54 @@ app.get("/bookproduct/:id", (req, res) => {
 });
 
 // product booking//
+
+// booking //
+app.post("/bookdata", (req, res) => {
+  const { shop_id, product_id, booking_qty, booking_curdate, booking_foredate, booking_amount } = req.body
+  //  console.log(shop_id, product_id, booking_qty, booking_curdate, booking_foredate, booking_amount);
+
+  let qry =
+    "insert into tbl_booking (shop_id, product_id, booking_qty, booking_curdate, booking_foredate, booking_amount) values('"
+    + shop_id + "' ,'"
+    + product_id + "', '"
+    + booking_qty + "', '"
+    + booking_curdate + "', '"
+    + booking_foredate + "', '"
+    + booking_amount + "')";
+  console.log(qry);
+
+
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data Saved",
+      });
+    }
+  });
+});
+// bookimg //
+
+//boohing view by jailer//
+app.get("/bookdetailsData/:id", (req, res) => {
+  console.log('hi');
+  const id = req.params.id;
+  let qry = "select * from tbl_booking d INNER JOIN tbl_shop s on d.shop_id = s.shop_id INNER JOIN tbl_product  p  on d.product_id = p.product_id INNER JOIN tbl_jail j on p.jail_id = j.jail_id where j.jail_id = " + id  
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      console.log(result);
+      res.send({
+        bookdata: result,
+      });
+    }
+  });
+});
+
+//boohing view by jailer//
 
 
 

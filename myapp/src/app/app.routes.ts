@@ -21,6 +21,7 @@ import { ShopmyProfileComponent } from './Shop/pages/shopmy-profile/shopmy-profi
 import { ShopeditProfileComponent } from './Shop/pages/shopedit-profile/shopedit-profile.component';
 import { ShopchangepassComponent } from './Shop/pages/shopchangepass/shopchangepass.component';
 import { BuyproductComponent } from './Shop/pages/buyproduct/buyproduct.component';
+import { ViewbookingComponent } from './Jail/pages/viewbooking/viewbooking.component';
 
 
 export const routes: Routes = [
@@ -91,6 +92,11 @@ export const routes: Routes = [
                 path: 'prisioner',
                 component: PrisonerComponent,
             },
+            {
+                path: 'viewbooking',
+                component: ViewbookingComponent,
+            },
+            
 
         ]
     },

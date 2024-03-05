@@ -1,0 +1,26 @@
+<div class="main" >
+    <div class="card">
+      <!-- <div class="img">
+        <img src="{{ shopdata?.shop_logo}}" alt="" style="height: 10rem;width: 10rem;">
+      </div> -->
+  
+  
+      <div class="details" style="display: flex;flex-direction: column; align-items: center;justify-content: center;margin-top: 8rem;" 
+       *ngFor="let bookdata of bookdata">
+  
+        <h2>Product Name : {{bookdata?.product_name}}</h2>
+        <h2>Quantity : {{bookdata?.booking_qty}}</h2>
+        <h2>Shop Name : {{bookdata?.shop_name}}</h2>
+        <h2>Shop Contact : {{bookdata?.shop_contact}}</h2>
+        <h2>Shop Email : {{bookdata?.shop_email}}</h2>
+        <h2>Shop Address : {{bookdata?.shop_address}}</h2>
+        <h2>ForeDate : {{bookdata?.booking_foredate}}</h2>
+      
+       
+        
+  
+    </div>
+  </div>
+
+  
+

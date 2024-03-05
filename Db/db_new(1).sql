@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2024 at 10:55 AM
+-- Generation Time: Mar 05, 2024 at 11:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,6 +44,46 @@ INSERT INTO `tbl_admin` (`admin_id`, `admin_name`, `admin_email`, `admin_passwor
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_assignduty`
+--
+
+CREATE TABLE `tbl_assignduty` (
+  `assignduty_id` int(11) NOT NULL,
+  `prisioner_id` int(11) NOT NULL,
+  `jail_id` int(11) NOT NULL,
+  `assignduty_date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_booking`
+--
+
+CREATE TABLE `tbl_booking` (
+  `booking_id` int(11) NOT NULL,
+  `shop_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `booking_qty` int(11) NOT NULL,
+  `booking_curdate` date NOT NULL,
+  `booking_foredate` date NOT NULL,
+  `booking_amount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_booking`
+--
+
+INSERT INTO `tbl_booking` (`booking_id`, `shop_id`, `product_id`, `booking_qty`, `booking_curdate`, `booking_foredate`, `booking_amount`) VALUES
+(5, 5, 0, 12, '0000-00-00', '0000-00-00', 1),
+(6, 5, 0, 2, '0000-00-00', '0000-00-00', 3),
+(7, 5, 0, 2, '0000-00-00', '0000-00-00', 3),
+(8, 5, 0, 2, '0000-00-00', '0000-00-00', 3),
+(9, 5, 15, 12, '0000-00-00', '0000-00-00', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_category`
 --
 
@@ -58,7 +98,8 @@ CREATE TABLE `tbl_category` (
 
 INSERT INTO `tbl_category` (`category_id`, `category_name`) VALUES
 (1, 'wheate'),
-(3, 'juteee');
+(3, 'juteee'),
+(29, 'rice');
 
 -- --------------------------------------------------------
 
@@ -104,7 +145,7 @@ CREATE TABLE `tbl_jail` (
 
 INSERT INTO `tbl_jail` (`jail_id`, `district_id`, `jail_name`, `jail_contact`, `jail_address`, `jail_email`, `jail_username`, `jail_password`) VALUES
 (1, 22, 'idukki', 2147483647, 'fwfwgg', 'dfgddbhdhd', 'kshvshg', 'fsfdsfs'),
-(2, 22, 'poli', 2147483647, 'fwfwgg', 'jail@gmail.com', 'kshvshg', '123456'),
+(2, 22, 'jail', 2147483647, 'pure', 'jail@gmail.com', 'jail1', '654321'),
 (4, 0, '', 0, '', '', '', ''),
 (5, 21, 'jvbj', 0, '', '', '', '');
 
@@ -183,12 +224,12 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`product_id`, `category_id`, `jail_id`, `product_name`, `product_details`, `product_photo`, `product_rate`) VALUES
-(1, 1, 0, 'bread', 'high quality wheat', 'dbhj', 0),
-(4, 4, 0, 'cotto', 'high quality cotton', 'dbhj', 0),
-(5, 3, 2, 'cotton', 'high quality cotton', 'dbhj', 0),
-(6, 3, 2, 'cotton', 'high quality cotton', 'dbhj', 30),
-(7, 1, 0, 'bread', 'pure', 'cfs', 34),
-(8, 27, 0, 'dfw', 'df', 'fw3', 33);
+(12, 1, 2, 'bread', 'sdv', 'd', 3),
+(15, 1, 2, 'parotta', 'sc', 'asc', 0),
+(17, 3, 2, 'dress', 'dvs', 'sf', 0),
+(18, 3, 2, 'vs', 'dvs', 'xv', 76),
+(19, 29, 2, 'dfs', 'xdvs', 'vsv', 43),
+(20, 29, 2, 'xfv', 'xv', 'cv', 23);
 
 -- --------------------------------------------------------
 
@@ -203,7 +244,7 @@ CREATE TABLE `tbl_shop` (
   `shop_contact` int(11) NOT NULL,
   `shop_address` varchar(50) NOT NULL,
   `shop_email` varchar(45) NOT NULL,
-  `shop_logo` varchar(34) NOT NULL,
+  `shop_logo` varchar(300) NOT NULL,
   `shop_licenseproof` varchar(50) NOT NULL,
   `shop_ownername` varchar(30) NOT NULL,
   `shop_username` varchar(50) NOT NULL,
@@ -219,7 +260,9 @@ INSERT INTO `tbl_shop` (`shop_id`, `place_id`, `shop_name`, `shop_contact`, `sho
 (5, 7, 'shop2', 1234254, 'kavana', 'shop2@gmail.com', 'dfsaggsheh', 'sgshfsdh', 'robert', 'rbt', '123456', ''),
 (6, 0, 'undefined', 0, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', ''),
 (9, 0, 'ayana', 42525, 'sgshbd', 'fbzsdf', 'undefined', 'sfgsg', 'fbgsgfs', 'sgfs', 'sfgs', 'sfg'),
-(14, 32, 'rajas', 12345, 'asdgg', 'as@gmail.com', 'http://127.0.0.1:5000/images/WIN_2', 'kbh', 'jh', 'j', '123456', 'open');
+(14, 32, 'rajas', 12345, 'asdgg', 'as@gmail.com', 'http://127.0.0.1:5000/images/WIN_2', 'kbh', 'jh', 'j', '123456', 'open'),
+(15, 32, 'ovenfresh', 2147483647, 'vazhakulam', 'ovenfresh@gmail.com', 'http://127.0.0.1:5000/images/WIN_2', 'sss', 'sss', 'sss', '1234', 'open'),
+(16, 32, 'open', 2147483647, 'vazhakulam', 'pulimala@gmail.com', 'http://127.0.0.1:5000/images/WIN_20240111_09_33_16_Pro.jpg', 'adipoli', 'shaji', 'shaji@123', '654321', 'close');
 
 --
 -- Indexes for dumped tables
@@ -230,6 +273,18 @@ INSERT INTO `tbl_shop` (`shop_id`, `place_id`, `shop_name`, `shop_contact`, `sho
 --
 ALTER TABLE `tbl_admin`
   ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `tbl_assignduty`
+--
+ALTER TABLE `tbl_assignduty`
+  ADD PRIMARY KEY (`assignduty_id`);
+
+--
+-- Indexes for table `tbl_booking`
+--
+ALTER TABLE `tbl_booking`
+  ADD PRIMARY KEY (`booking_id`);
 
 --
 -- Indexes for table `tbl_category`
@@ -284,10 +339,22 @@ ALTER TABLE `tbl_admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_assignduty`
+--
+ALTER TABLE `tbl_assignduty`
+  MODIFY `assignduty_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_booking`
+--
+ALTER TABLE `tbl_booking`
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_district`
@@ -317,13 +384,13 @@ ALTER TABLE `tbl_prisioner`
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_shop`
 --
 ALTER TABLE `tbl_shop`
-  MODIFY `shop_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `shop_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
