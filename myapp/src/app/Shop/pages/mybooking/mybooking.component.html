@@ -1,0 +1,35 @@
+<div class="main">
+    <div class="card">
+        <!-- <div class="img">
+        <img src="{{ shopdata?.shop_logo}}" alt="" style="height: 10rem;width: 10rem;">
+      </div> -->
+
+
+        <div class="details"
+            style="display: flex;flex-direction: column; align-items: center;justify-content: center;margin-top: 8rem;"
+            *ngFor="let bookdata of bookdata">
+
+
+            <h2>Quantity : {{bookdata?.booking_qty}}</h2>
+            <h2>ForeDate : {{bookdata?.booking_foredate}}</h2>
+            <h2 *ngIf="bookdata.booking_status === 1">{{bookdata?.jail_name}}  accepted your request
+                <a [routerLink]="['/Shop/payment']" [queryParams]="{booking_id: bookdata.booking_id}">
+                    pay now
+                  </a>
+            </h2>
+            <h2 *ngIf="bookdata.booking_status === 2">{{bookdata?.jail_name}}  rejected your request</h2>
+            <h2 *ngIf="bookdata.booking_status === 3">{{bookdata?.jail_name}} Paid
+                <a [routerLink]="['/Shop/postcomplaint']" [queryParams]="{booking_id: bookdata.booking_id}">
+                    complaint
+                  </a>
+            </h2>
+
+            
+
+
+
+
+
+
+        </div>
+    </div>

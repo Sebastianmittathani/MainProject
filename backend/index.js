@@ -796,7 +796,7 @@ app.patch("/Prisioner/:Id", (req, res) => {
 });
 // -------------------------------------------------PRISIONER REGISTRATION ENDS HERE-------------------------------------------------
 
-// ------------------------------------------------------- Jail fetch -----------------------------------------------------------------//
+// Jail fetch //
 app.get("/jailfetch/", (req, res) => {
   let qry = "select * from tbl_jail"
   connection.query(qry, (err, result) => {
@@ -827,7 +827,7 @@ app.get("/jailfetchbyId/:id", (req, res) => {
 
 //jail fetch//
 
-//----------------------------------------jail  myprofile ---------------------------------------------------------------//
+//jail  myprofile //
 
 app.get("/myprofile/:jail_id", (req, res) => {
   const jail_id = req.params.jail_id;
@@ -905,7 +905,7 @@ app.patch("/changepass/:id", (req, res) => {
 
 
 
-//----------------------------------------------------product fetch---------------------------------------------------------//
+//product fetch//
 
 app.get("/fetchproduct/:id", (req, res) => {
   let qry = "select * from tbl_product where jail_id =" + req.params.id
@@ -1018,7 +1018,7 @@ app.patch("/shopchangepass/:id", (req, res) => {
 
 //shop changePassword//
 
-// product booking//
+//view  product in booking page//
 
 
 app.get("/bookproduct/:id", (req, res) => {
@@ -1037,9 +1037,9 @@ app.get("/bookproduct/:id", (req, res) => {
   });
 });
 
-// product booking//
+//view  product in booking page//
 
-// booking //
+// booking product in booking page //
 app.post("/bookdata", (req, res) => {
   const { shop_id, product_id, booking_qty, booking_curdate, booking_foredate, booking_amount } = req.body
   //  console.log(shop_id, product_id, booking_qty, booking_curdate, booking_foredate, booking_amount);
@@ -1065,9 +1065,11 @@ app.post("/bookdata", (req, res) => {
     }
   });
 });
-// bookimg //
+// booking product in booking page //
 
-//boohing view by jailer//
+//booking view by jailer//
+
+
 app.get("/bookdetailsData/:id", (req, res) => {
   console.log('hi');
   const id = req.params.id;
@@ -1085,7 +1087,190 @@ app.get("/bookdetailsData/:id", (req, res) => {
   });
 });
 
-//boohing view by jailer//
+app.patch("/bookaccept/:Id", (req, res) => {
+  const id = req.params.Id
+  let qry = "update tbl_booking set booking_status = 1 where booking_id  = " + id;
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data updated",
+      });
+    }
+  });
+});
+
+
+app.patch("/bookreject/:Id", (req, res) => {
+  const id = req.params.Id
+  let qry = "update tbl_booking set booking_status = 2 where booking_id  = " + id;
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data updated",
+      });
+    }
+  });
+});
+
+
+
+//booking view by jailer//
+
+//booking reply viewed by shop
+
+app.get("/bookingreply/:id", (req, res) => {
+  const id = req.params.id;
+  let qry = "select * from tbl_booking where shop_id = " + id  
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      console.log(result);
+      res.send({
+        booking: result,
+      });
+    }
+  });
+});
+//booking reply viewed by shop
+
+//booking payment by shop
+
+app.patch("/bookpay/:Id", (req, res) => {
+  const id = req.params.Id
+  let qry = "update tbl_booking set booking_status = 3 where booking_id  = " + id;
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data updated",
+      });
+    }
+  });
+});
+
+//booking payment by shop
+
+
+
+// complaint posting by shop
+
+app.post("/Postcomplaint", (req, res) => {
+  const { shop_id, booking_id, complaint_title, complaint_details } = req.body
+    console.log(shop_id, booking_id, complaint_title, complaint_details);
+
+  let qry =
+    "insert into tbl_complaint (shop_id, booking_id, complaint_title, complaint_details) values('"
+    + shop_id + "' ,'"
+    + booking_id + "', '"
+    + complaint_title + "', '"
+    + complaint_details + "')";
+  console.log(qry);
+
+
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data Saved",
+      });
+    }
+  });
+});
+
+// complaint posting by shop
+
+//complaint view by jail
+
+app.get("/complaintdetails/:id", (req, res) => {
+  //  console.log('hi');
+  const id = req.params.id;
+  let qry = "select * from tbl_complaint c INNER JOIN tbl_booking d on c.booking_id = d.booking_id  INNER JOIN  tbl_shop s on d.shop_id = s.shop_id INNER JOIN tbl_product  p  on d.product_id = p.product_id INNER JOIN tbl_jail j on p.jail_id = j.jail_id where j.jail_id = " + id  
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      console.log(result);
+      res.send({
+        complaintdata: result,
+      });
+    }
+  });
+});
+
+
+//complaint view by jail
+
+//complaint reply by jail
+
+app.patch("/complaintReply/:Id", (req, res) => {
+  console.log(req.body);
+  const id = req.params.Id
+  const { complaint_reply } = req.body
+    console.log(complaint_reply);
+
+    let qry = "update tbl_complaint set complaint_reply = '" + complaint_reply + "' where complaint_id = " + id;
+  console.log(qry);
+
+
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data Saved",
+      });
+    }
+  });
+});
+
+// app.patch("/District/:Id", (req, res) => {
+//   console.log(req.body);
+//   const id = req.params.Id
+//   const { districtName } = req.body
+//   let qry = "update tbl_district set district_name = '" + districtName + "' where district_id = " + id;
+//   console.log(qry);
+//   connection.query(qry, (err, result) => {
+//     if (err) {
+//       console.log("Error");
+//     } else {
+//       res.send({
+//         message: "Data updated",
+//       });
+//     }
+//   });
+// });
+
+//complaint reply by jail
+
+// view complaint reply by shop
+
+app.get("/Viewcomplaintreply/:id", (req, res) => {
+  //  console.log('hi');
+  const id = req.params.id;
+  let qry = "select * from tbl_complaint  where shop_id " + id  
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      console.log(result);
+      res.send({
+        complaintdata: result,
+      });
+    }
+  });
+});
+
+
 
 
 

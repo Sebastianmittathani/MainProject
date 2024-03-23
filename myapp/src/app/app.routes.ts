@@ -22,6 +22,11 @@ import { ShopeditProfileComponent } from './Shop/pages/shopedit-profile/shopedit
 import { ShopchangepassComponent } from './Shop/pages/shopchangepass/shopchangepass.component';
 import { BuyproductComponent } from './Shop/pages/buyproduct/buyproduct.component';
 import { ViewbookingComponent } from './Jail/pages/viewbooking/viewbooking.component';
+import { MybookingComponent } from './Shop/pages/mybooking/mybooking.component';
+import { PaymentComponent } from './Shop/pages/payment/payment.component';
+import { PostcomplaintComponent } from './Shop/pages/postcomplaint/postcomplaint.component';
+import { ViewcomplaintComponent } from './Jail/pages/viewcomplaint/viewcomplaint.component';
+import { ViewcompReplyComponent } from './Shop/pages/viewcomp-reply/viewcomp-reply.component';
 
 
 export const routes: Routes = [
@@ -56,6 +61,22 @@ export const routes: Routes = [
             {
                 path: 'buyproduct',
                 component: BuyproductComponent,
+            },
+            {
+                path: 'mybooking',
+                component: MybookingComponent,
+            },
+            {
+                path: 'payment',
+                component:PaymentComponent,
+            },
+            {
+                path: 'postcomplaint',
+                component:PostcomplaintComponent,
+            },
+            {
+                path: 'viewcomplaintReply',
+                component:ViewcompReplyComponent,
             },
             
             
@@ -95,6 +116,10 @@ export const routes: Routes = [
             {
                 path: 'viewbooking',
                 component: ViewbookingComponent,
+            },
+            {
+                path: 'viewcomplaint',
+                component: ViewcomplaintComponent,
             },
             
 

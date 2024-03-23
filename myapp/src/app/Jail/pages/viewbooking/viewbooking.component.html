@@ -16,7 +16,9 @@
         <h2>Shop Address : {{bookdata?.shop_address}}</h2>
         <h2>ForeDate : {{bookdata?.booking_foredate}}</h2>
       
-       
+        <div class="btn">
+          <button class="acceptButton" (click)="bookstat(bookdata.booking_id)">Accept</button> <button class="rejecttButton" (click)="bookrejct(bookdata.booking_id)">Reject</button>
+      </div>
         
   
     </div>
