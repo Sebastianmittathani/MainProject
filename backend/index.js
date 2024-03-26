@@ -1232,22 +1232,7 @@ app.patch("/complaintReply/:Id", (req, res) => {
   });
 });
 
-// app.patch("/District/:Id", (req, res) => {
-//   console.log(req.body);
-//   const id = req.params.Id
-//   const { districtName } = req.body
-//   let qry = "update tbl_district set district_name = '" + districtName + "' where district_id = " + id;
-//   console.log(qry);
-//   connection.query(qry, (err, result) => {
-//     if (err) {
-//       console.log("Error");
-//     } else {
-//       res.send({
-//         message: "Data updated",
-//       });
-//     }
-//   });
-// });
+
 
 //complaint reply by jail
 

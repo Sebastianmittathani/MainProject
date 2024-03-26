@@ -5,7 +5,6 @@ import axios from 'axios';
 
 interface replyfetch {
   complaint_reply: any;
-  complaint_id: any;
  jail_id:any;
 }
 
@@ -64,6 +63,8 @@ export class ViewcomplaintComponent {
     })
   }
 
+
+
   replyForm = new FormGroup(
     {
       complaint_reply: new FormControl(''),
@@ -74,11 +75,10 @@ export class ViewcomplaintComponent {
   rep() {
     const data: replyfetch = {
       complaint_reply: this.replyForm.value.complaint_reply,
-      complaint_id:3,
       jail_id: sessionStorage.getItem("jid")
     };
 
-    axios.patch('http://localhost:5000/complaintReply/', data).then((response) => {
+    axios.patch(`http://localhost:5000/complaintReply/${this.replyId}`, data).then((response) => {
       alert(response.data.message)
     })
 

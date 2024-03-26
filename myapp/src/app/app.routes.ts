@@ -27,6 +27,9 @@ import { PaymentComponent } from './Shop/pages/payment/payment.component';
 import { PostcomplaintComponent } from './Shop/pages/postcomplaint/postcomplaint.component';
 import { ViewcomplaintComponent } from './Jail/pages/viewcomplaint/viewcomplaint.component';
 import { ViewcompReplyComponent } from './Shop/pages/viewcomp-reply/viewcomp-reply.component';
+import { PostfeedbackComponent } from './Shop/pages/postfeedback/postfeedback.component';
+import { ViewfeedbackComponent } from './Jail/pages/viewfeedback/viewfeedback.component';
+import { ViewcomplaintandreplyComponent } from './Admin/Pages/viewcomplaintandreply/viewcomplaintandreply.component';
 
 
 export const routes: Routes = [
@@ -49,6 +52,10 @@ export const routes: Routes = [
             {
                 path: 'shopchangepass',
                 component: ShopchangepassComponent,
+            },
+              {
+                path: 'complaintreplyview',
+                component:ViewcompReplyComponent,
             },
             {
                 path: 'viewjail',
@@ -75,10 +82,11 @@ export const routes: Routes = [
                 component:PostcomplaintComponent,
             },
             {
-                path: 'viewcomplaintReply',
-                component:ViewcompReplyComponent,
+                path: 'postfeedback',
+                component:PostfeedbackComponent,
             },
-            
+          
+         
             
 
         ]
@@ -121,6 +129,12 @@ export const routes: Routes = [
                 path: 'viewcomplaint',
                 component: ViewcomplaintComponent,
             },
+            {
+                path: 'viewfeedback',
+                component:ViewfeedbackComponent ,
+            },
+            
+
             
 
         ]
@@ -157,6 +171,10 @@ export const routes: Routes = [
             {
                 path: 'Place',
                 component: PlaceComponent,
+            },
+            {
+                path: 'viewcomplaintandreply',
+                component: ViewcomplaintandreplyComponent,
             },
 
 
