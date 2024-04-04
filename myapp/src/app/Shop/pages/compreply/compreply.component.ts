@@ -11,23 +11,25 @@ interface complaintreply {
   complaint_reply: any;
 }
 
+
 @Component({
-  selector: 'app-viewcomp-reply',
+  selector: 'app-compreply',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule],
-  templateUrl: './viewcomp-reply.component.html',
-  styleUrl: './viewcomp-reply.component.css'
+  templateUrl: './compreply.component.html',
+  styleUrl: './compreply.component.css'
 })
-export class ViewcompReplyComponent {
+export class CompreplyComponent {
 
   complaintdata: complaintreply[] = [];
   sid: any;
-  jid: any;
 
   
 
   ngOnInit() {
-
+    
+    console.log("hi");
+    
     if (typeof sessionStorage !== 'undefined') {
 
       this.sid = sessionStorage.getItem('sid');// Access sessionStorage here
@@ -45,8 +47,8 @@ export class ViewcompReplyComponent {
     axios.get(`http://localhost:5000/Viewcomplaintreply/${this.sid}`).then((response) => {
       // console.log(response.data.booking)
 
-      this.complaintdata = response.data.complaintreply
-      console.log(response.data.complaintreply);
+      this.complaintdata = response.data.complaintdata
+      console.log(response.data.complaintdata);
       
 
 
@@ -56,3 +58,4 @@ export class ViewcompReplyComponent {
   }
 
 }
+

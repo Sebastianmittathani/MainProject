@@ -1239,9 +1239,9 @@ app.patch("/complaintReply/:Id", (req, res) => {
 // view complaint reply by shop
 
 app.get("/Viewcomplaintreply/:id", (req, res) => {
-  //  console.log('hi');
+   console.log('hi');
   const id = req.params.id;
-  let qry = "select * from tbl_complaint  where shop_id " + id  
+  let qry = "select * from tbl_complaint c INNER JOIN tbl_booking b ON b.booking_id = c.booking_id INNER JOIN tbl_product p ON p.product_id =b.product_id INNER JOIN tbl_jail j ON j.jail_id = p.jail_id where c.shop_id  ="+ id  
   console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {
@@ -1254,6 +1254,104 @@ app.get("/Viewcomplaintreply/:id", (req, res) => {
     }
   });
 });
+
+
+
+
+
+
+// feedback posting by shop
+
+app.post("/Postfeedback", (req, res) => {
+  const { shop_id, booking_id, feedback_title, feedback_details } = req.body
+    console.log(shop_id, booking_id, feedback_title, feedback_details);
+
+  let qry =
+    "insert into tbl_feedback (shop_id, booking_id, feedback_title, feedback_details) values('"
+    + shop_id + "' ,'"
+    + booking_id + "', '"
+    + feedback_title + "', '"
+    + feedback_details + "')";
+  console.log(qry);
+
+
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data Saved",
+      });
+    }
+  });
+});
+
+// feedback posting by shop
+
+// feedback view by jail
+
+app.get("/viewfeedback/:id", (req, res) => {
+  //  console.log('hi');
+  const id = req.params.id;
+  let qry = "select * from tbl_feedback c INNER JOIN tbl_booking d on c.booking_id = d.booking_id  INNER JOIN  tbl_shop s on d.shop_id = s.shop_id INNER JOIN tbl_product  p  on d.product_id = p.product_id INNER JOIN tbl_jail j on p.jail_id = j.jail_id where j.jail_id = " + id  
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      console.log(result);
+      res.send({
+        feedbackdata: result,
+      });
+    }
+  });
+});
+
+
+// feedback view by jail
+
+// notification from jail //
+
+app.get("/notificationfromVol/:id", (req, res) => {
+  const Id = req.params.id
+  let qry = "select * FROM tbl_booking b INNER JOIN tbl_product p ON p.product_id = b.product_id INNER JOIN tbl_jail j on j.jail_id = p.jail_id where  b.shop_id = " + Id  
+  // console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        notitificationfromjail: result
+      });
+    }
+  });
+});
+
+
+
+app.patch("/clearnotification/:Id", (req, res) => {
+  const id = req.params.Id
+  // const { districtName } = req.body
+  let qry = "update tbl_booking set clear_status = 1 where booking_id = " + id;
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data updated",
+      });
+    }
+  });
+});
+
+// notification from jail //
+
+
+
+
+
+
 
 
 

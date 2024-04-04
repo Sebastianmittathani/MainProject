@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewcompReplyComponent } from './viewcomp-reply.component';
+import { CompreplyComponent } from './compreply.component';
 
-describe('ViewcompReplyComponent', () => {
-  let component: ViewcompReplyComponent;
-  let fixture: ComponentFixture<ViewcompReplyComponent>;
+describe('CompreplyComponent', () => {
+  let component: CompreplyComponent;
+  let fixture: ComponentFixture<CompreplyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewcompReplyComponent]
+      imports: [CompreplyComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ViewcompReplyComponent);
+    fixture = TestBed.createComponent(CompreplyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

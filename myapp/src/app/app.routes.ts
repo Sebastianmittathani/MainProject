@@ -26,10 +26,10 @@ import { MybookingComponent } from './Shop/pages/mybooking/mybooking.component';
 import { PaymentComponent } from './Shop/pages/payment/payment.component';
 import { PostcomplaintComponent } from './Shop/pages/postcomplaint/postcomplaint.component';
 import { ViewcomplaintComponent } from './Jail/pages/viewcomplaint/viewcomplaint.component';
-import { ViewcompReplyComponent } from './Shop/pages/viewcomp-reply/viewcomp-reply.component';
 import { PostfeedbackComponent } from './Shop/pages/postfeedback/postfeedback.component';
 import { ViewfeedbackComponent } from './Jail/pages/viewfeedback/viewfeedback.component';
 import { ViewcomplaintandreplyComponent } from './Admin/Pages/viewcomplaintandreply/viewcomplaintandreply.component';
+import { CompreplyComponent } from './Shop/pages/compreply/compreply.component';
 
 
 export const routes: Routes = [
@@ -54,8 +54,8 @@ export const routes: Routes = [
                 component: ShopchangepassComponent,
             },
               {
-                path: 'complaintreplyview',
-                component:ViewcompReplyComponent,
+                path: 'compreply',
+                component:CompreplyComponent,
             },
             {
                 path: 'viewjail',

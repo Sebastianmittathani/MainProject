@@ -12,6 +12,7 @@ interface complaintfetch {
   complaint_title: any;
   complaint_details: any;
   complaint_id: any;
+  product_name: any;
 
 }
 
@@ -29,6 +30,7 @@ export class ViewcomplaintComponent {
   sid: any;
   complaint_id :any
   replyId: any;
+  product_name: any
 
   
 

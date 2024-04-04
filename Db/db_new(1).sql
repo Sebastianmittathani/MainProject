@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 11:47 AM
+-- Generation Time: Apr 04, 2024 at 01:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,19 +67,18 @@ CREATE TABLE `tbl_booking` (
   `booking_qty` int(11) NOT NULL,
   `booking_curdate` date NOT NULL,
   `booking_foredate` date NOT NULL,
-  `booking_amount` int(11) NOT NULL
+  `booking_amount` int(11) NOT NULL,
+  `booking_status` int(11) NOT NULL,
+  `clear_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_booking`
 --
 
-INSERT INTO `tbl_booking` (`booking_id`, `shop_id`, `product_id`, `booking_qty`, `booking_curdate`, `booking_foredate`, `booking_amount`) VALUES
-(5, 5, 0, 12, '0000-00-00', '0000-00-00', 1),
-(6, 5, 0, 2, '0000-00-00', '0000-00-00', 3),
-(7, 5, 0, 2, '0000-00-00', '0000-00-00', 3),
-(8, 5, 0, 2, '0000-00-00', '0000-00-00', 3),
-(9, 5, 15, 12, '0000-00-00', '0000-00-00', 2);
+INSERT INTO `tbl_booking` (`booking_id`, `shop_id`, `product_id`, `booking_qty`, `booking_curdate`, `booking_foredate`, `booking_amount`, `booking_status`, `clear_status`) VALUES
+(18, 5, 12, 1, '0000-00-00', '0000-00-00', 3, 2, 1),
+(19, 5, 12, 10, '0000-00-00', '0000-00-00', 30, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -104,6 +103,35 @@ INSERT INTO `tbl_category` (`category_id`, `category_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_complaint`
+--
+
+CREATE TABLE `tbl_complaint` (
+  `complaint_id` int(11) NOT NULL,
+  `shop_id` int(11) NOT NULL,
+  `booking_id` int(11) NOT NULL,
+  `complaint_title` varchar(50) NOT NULL,
+  `complaint_details` varchar(50) NOT NULL,
+  `complaint_reply` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_complaint`
+--
+
+INSERT INTO `tbl_complaint` (`complaint_id`, `shop_id`, `booking_id`, `complaint_title`, `complaint_details`, `complaint_reply`) VALUES
+(1, 5, 9, 'q', 'q', 'dghdgjhdg'),
+(2, 5, 10, 'e', 'e', ''),
+(3, 0, 0, '', '', ''),
+(5, 0, 0, '', '', 'ok'),
+(6, 5, 9, 'bad', 'bad', ''),
+(8, 5, 9, 's', 's', ''),
+(10, 5, 19, 'bad', 'bad', 'ok'),
+(11, 5, 19, 'asaf', 'dfs', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_district`
 --
 
@@ -120,7 +148,30 @@ INSERT INTO `tbl_district` (`district_id`, `district_name`) VALUES
 (21, 'kollam'),
 (22, 'kannur'),
 (29, 'jfghjhjfg'),
-(32, 'idukki');
+(32, 'idukki'),
+(34, 'hh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_feedback`
+--
+
+CREATE TABLE `tbl_feedback` (
+  `feedback_id` int(11) NOT NULL,
+  `feedback_title` varchar(60) NOT NULL,
+  `feedback_details` varchar(60) NOT NULL,
+  `shop_id` int(11) NOT NULL,
+  `booking_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_feedback`
+--
+
+INSERT INTO `tbl_feedback` (`feedback_id`, `feedback_title`, `feedback_details`, `shop_id`, `booking_id`) VALUES
+(1, 'kk', 'good', 5, 0),
+(3, 's', 's', 5, 19);
 
 -- --------------------------------------------------------
 
@@ -147,7 +198,8 @@ INSERT INTO `tbl_jail` (`jail_id`, `district_id`, `jail_name`, `jail_contact`, `
 (1, 22, 'idukki', 2147483647, 'fwfwgg', 'dfgddbhdhd', 'kshvshg', 'fsfdsfs'),
 (2, 22, 'jail', 2147483647, 'pure', 'jail@gmail.com', 'jail1', '654321'),
 (4, 0, '', 0, '', '', '', ''),
-(5, 21, 'jvbj', 0, '', '', '', '');
+(5, 21, 'jvbj', 0, '', '', '', ''),
+(6, 32, 'jail3', 88, 'ddhgv', 'jail3@gmail.com', 'sbj', '1234567');
 
 -- --------------------------------------------------------
 
@@ -293,10 +345,22 @@ ALTER TABLE `tbl_category`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Indexes for table `tbl_complaint`
+--
+ALTER TABLE `tbl_complaint`
+  ADD PRIMARY KEY (`complaint_id`);
+
+--
 -- Indexes for table `tbl_district`
 --
 ALTER TABLE `tbl_district`
   ADD PRIMARY KEY (`district_id`);
+
+--
+-- Indexes for table `tbl_feedback`
+--
+ALTER TABLE `tbl_feedback`
+  ADD PRIMARY KEY (`feedback_id`);
 
 --
 -- Indexes for table `tbl_jail`
@@ -348,7 +412,7 @@ ALTER TABLE `tbl_assignduty`
 -- AUTO_INCREMENT for table `tbl_booking`
 --
 ALTER TABLE `tbl_booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_category`
@@ -357,16 +421,28 @@ ALTER TABLE `tbl_category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
+-- AUTO_INCREMENT for table `tbl_complaint`
+--
+ALTER TABLE `tbl_complaint`
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `tbl_district`
 --
 ALTER TABLE `tbl_district`
-  MODIFY `district_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `district_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `tbl_feedback`
+--
+ALTER TABLE `tbl_feedback`
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_jail`
 --
 ALTER TABLE `tbl_jail`
-  MODIFY `jail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `jail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_place`
