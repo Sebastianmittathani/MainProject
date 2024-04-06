@@ -16,13 +16,41 @@
             <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
           </li>
         </ul>
-        <form class="d-flex" role="search">
+        <!-- <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
+        <div class="btn-group dropstart">
+
+          <span class="material-symbols-outlined " data-bs-toggle="dropdown" aria-expanded="false">
+            notifications_active
+          </span>
+  
+          <ul class="dropdown-menu" style=" height: 40rem;width: 15rem;">
+            <div *ngFor="let item of notification">
+  
+              <div *ngIf="item.booking_status === 3 && item.clear_status === 0 ">{{item?.shop_name}} payment is done
+                <button style="width: 14rem;border: 0;margin-left: 8px;" (click)="clear(item.booking_id)"> clear </button>
+              </div>
+              <!-- <div *ngIf="item.booking_status === 2 && item.clear_status === 0">{{item?.jail_name}} rejected your request
+                <button style="width: 14rem;border: 0;margin-left: 8px;" (click)="clear(item.booking_id)"> clear </button>
+              </div> -->
+  
+              
+            </div>
+  
+            <!-- <div *ngFor="let item of notitificationofinfo">
+  
+              <div *ngIf="item.apply_status === 1">Admin has accepted your request</div>
+              <div *ngIf="item.apply_status === 2">Admin has rejected your request</div>
+  
+              <button style="width: 14rem;border: 0;margin-left: 8px;" (click)="clearinfo(item.apply_id)"> clear </button>
+            </div> -->
+          </ul>
+        </div>
         
         
       </div>

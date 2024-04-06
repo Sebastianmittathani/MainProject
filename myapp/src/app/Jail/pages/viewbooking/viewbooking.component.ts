@@ -12,6 +12,7 @@ interface bookdetails {
   shop_contact: any,
   shop_email: any,
   booking_id : any;
+  bookins_status : any;
 }
 
 @Component({
@@ -75,6 +76,27 @@ export class ViewbookingComponent {
 
     })
   }
+
+//   infoaccept(event:any){
+//     this.apply_id=event
+//   axios.patch(`http://localhost:5000/infoaccept/${this.apply_id}` ).then((response) => {
+//     alert(response.data.message)
+//     this.infoVerificationFetch()
+//     this.infoverificationForm.reset();
+
+
+//   })
+//  }
+//  inforreject(event:any){
+//   this.apply_id=event
+// axios.patch(`http://localhost:5000/inforeject/${this.apply_id}` ).then((response) => {
+//   alert(response.data.message)
+//   this.infoVerificationFetch()
+//   this.infoverificationForm.reset();
+
+
+// })
+// }
 }
 
 

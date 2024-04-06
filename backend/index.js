@@ -478,9 +478,12 @@ app.patch("/category/:Id", (req, res) => {
 
 
 // --------------------------------------------------PRODUCT BEGINS HERE------------------------------------------------------
-app.post("/Product", (req, res) => {
-  const { product_name, category_id, product_details, product_photo, product_rate, jail_id } = req.body
-  console.log(product_name, category_id, product_details, product_photo, product_rate, jail_id);
+app.post("/Product", upload.fields([{ name: "product_photo", maxCount: 1 },]), (req, res) => {
+
+  var fileValue = JSON.parse(JSON.stringify(req.files));
+  var photo = `http://127.0.0.1:${PORT}/images/${fileValue.product_photo[0].filename}`;
+  const { product_name, category_id, product_details, product_rate, jail_id } = req.body
+  console.log(product_name, category_id, product_details, product_rate, jail_id);
 
   let qry =
     "insert into tbl_product (product_name ,category_id,product_details,product_photo,product_rate,jail_id) values('" +
@@ -497,6 +500,33 @@ app.post("/Product", (req, res) => {
     }
   });
 });
+
+// app.post("/ShopRegister",
+//   upload.fields([
+//     { name: "shop_logo", maxCount: 1 },
+//   ]),
+//   (req, res) => {
+//     var fileValue = JSON.parse(JSON.stringify(req.files));
+//     var photo = `http://127.0.0.1:${PORT}/images/${fileValue.shop_logo[0].filename}`;
+
+//     const { place_id, shop_name, shop_contact, shop_address, shop_email, shop_licenseproof, shop_ownername, shop_username, shop_password, shop_status } = req.body
+//     console.log(req.body);
+
+//     console.log(photo);
+
+//     let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password,shop_status)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "','" + shop_status + "')";
+
+//     console.log(qry);
+//     connection.query(qry, (err, result) => {
+//       if (err) {
+//         console.log("Error");
+//       } else {
+//         res.send({
+//           message: "Data Saved",
+//         });
+//       }
+//     });
+//   });
 
 app.get("/Product", (req, res) => {
   let qry = "SELECT * FROM tbl_product INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id";
@@ -686,9 +716,9 @@ app.post("/Login", (req, res) => {
 
 
 
-// -------------------------------------------------------LOGINS ENDS HERE--------------------------------------------------------------
+//  LOGINS ENDS HERE 
 
-// -------------------------------------------------PRISIONER REGISTRATION BEGINS HERE-------------------------------------------------
+//  PRISIONER REGISTRATION BEGINS HERE
 app.post("/Prisioner", (req, res) => {
   const { prisioner_name, jail_id, prisioner_gender, prisioner_address, prisioner_contact, prisioner_email, prisioner_photo, prisioner_code,
     prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate, prisioner_status } = req.body
@@ -794,7 +824,7 @@ app.patch("/Prisioner/:Id", (req, res) => {
     }
   });
 });
-// -------------------------------------------------PRISIONER REGISTRATION ENDS HERE-------------------------------------------------
+// PRISIONER REGISTRATION ENDS HERE
 
 // Jail fetch //
 app.get("/jailfetch/", (req, res) => {
@@ -1048,8 +1078,7 @@ app.post("/bookdata", (req, res) => {
     "insert into tbl_booking (shop_id, product_id, booking_qty, booking_curdate, booking_foredate, booking_amount) values('"
     + shop_id + "' ,'"
     + product_id + "', '"
-    + booking_qty + "', '"
-    + booking_curdate + "', '"
+    + booking_qty + "', curdate(), '"
     + booking_foredate + "', '"
     + booking_amount + "')";
   console.log(qry);
@@ -1115,6 +1144,35 @@ app.patch("/bookreject/:Id", (req, res) => {
     }
   });
 });
+
+
+// app.patch("/infoaccept/:Id", (req, res) => {
+//   const id = req.params.Id
+//   let qry = "update tbl_apply set apply_status = 1,notificationstatus_info = 0  where apply_id = " + id;
+//   db.query(qry, (err, result) => {
+//     if (err) {
+//       console.log("Error");
+//     } else {
+//       res.send({
+//         message: "Data updated",
+//       });
+//     }
+//   });
+// });
+
+// app.patch("/inforeject/:Id", (req, res) => {
+//   const id = req.params.Id
+//   let qry = "update tbl_apply set apply_status = 2,notificationstatus_info = 0  where apply_id = " + id;
+//   db.query(qry, (err, result) => {
+//     if (err) {
+//       console.log("Error");
+//     } else {
+//       res.send({
+//         message: "Data updated",
+//       });
+//     }
+//   });
+// });
 
 
 
@@ -1346,6 +1404,66 @@ app.patch("/clearnotification/:Id", (req, res) => {
 });
 
 // notification from jail //
+
+
+// notification from shop //
+
+app.get("/notificationfromshop/:id", (req, res) => {
+  const Id = req.params.id
+  let qry = "select * FROM tbl_booking b INNER JOIN tbl_shop s ON s.shop_id = b.shop_id INNER JOIN tbl_product p ON p.product_id = b.product_id INNER JOIN tbl_jail j ON j.jail_id = p.jail_id where j.jail_id =" + Id  
+   console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        notitificationfromshop: result
+      });
+    }
+  });
+});
+
+
+
+app.patch("/clearnotificationshop/:Id", (req, res) => {
+  const id = req.params.Id
+  // const { districtName } = req.body
+  let qry = "update tbl_booking set clear_status = 1 where booking_id = " + id;
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.send({
+        message: "Data updated",
+      });
+    }
+  });
+});
+
+// notification from shop//
+
+
+// view complaint and reply by admin
+
+app.get("/viewcomplaintreplyAdmin/", (req, res) => {
+  console.log('hi');
+ const id = req.params.id;
+ let qry = "select * from tbl_complaint c INNER JOIN tbl_booking b ON b.booking_id = c.booking_id INNER JOIN tbl_product p ON p.product_id =b.product_id INNER JOIN tbl_jail j ON j.jail_id = p.jail_id INNER JOIN tbl_shop s ON s.shop_id = b.shop_id"
+ console.log(qry);
+ connection.query(qry, (err, result) => {
+   if (err) {
+     console.log("Error");
+   } else {
+     console.log(result);
+     res.send({
+       complaintdata: result,
+     });
+   }
+ });
+});
+
+// view complaint and reply by admin
 
 
 

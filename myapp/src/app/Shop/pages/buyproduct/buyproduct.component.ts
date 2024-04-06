@@ -9,7 +9,7 @@ interface bookproduct {
   product_details: any,
   product_photo: any,
   product_rate: any,
-  product_id:any
+  product_id: any
 }
 
 interface booking {
@@ -35,6 +35,8 @@ export class BuyproductComponent {
   bookdata: booking[] = [];
   productId: any
   sid: any
+  price: any
+  show: any
 
 
 
@@ -56,6 +58,8 @@ export class BuyproductComponent {
     axios.get('http://localhost:5000/bookproduct/' + this.productId).then((response) => {
       console.log(response.data.product[0]);
       this.productdata = response.data.product[0]
+      this.price = response.data.product[0].product_rate
+
 
     })
   }
@@ -72,14 +76,14 @@ export class BuyproductComponent {
     }
   );
 
-  book(id:any) {
+  book(id: any) {
 
 
 
     const bookdata: booking = {
-      product_id:id,
+      product_id: id,
       booking_qty: this.bookForm.value.booking_qty,
-      booking_amount: this.bookForm.value.booking_amount,
+      booking_amount: this.show,
       booking_foredate: this.bookForm.value.booking_foredate,
       shop_id: sessionStorage.getItem("sid")
     };
@@ -89,5 +93,14 @@ export class BuyproductComponent {
     })
 
   }
+
+  calculate(event: any) {
+    console.log('hi');
+    
+    let value = event.target.value;
+    this.show = value * this.price
+  }
+
+ 
 
 }

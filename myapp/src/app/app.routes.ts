@@ -28,8 +28,9 @@ import { PostcomplaintComponent } from './Shop/pages/postcomplaint/postcomplaint
 import { ViewcomplaintComponent } from './Jail/pages/viewcomplaint/viewcomplaint.component';
 import { PostfeedbackComponent } from './Shop/pages/postfeedback/postfeedback.component';
 import { ViewfeedbackComponent } from './Jail/pages/viewfeedback/viewfeedback.component';
-import { ViewcomplaintandreplyComponent } from './Admin/Pages/viewcomplaintandreply/viewcomplaintandreply.component';
 import { CompreplyComponent } from './Shop/pages/compreply/compreply.component';
+import { ComplaintviewComponent } from './Admin/Pages/complaintview/complaintview.component';
+import { ComplaintreplyviewComponent } from './Admin/Pages/complaintreplyview/complaintreplyview.component';
 
 
 export const routes: Routes = [
@@ -173,9 +174,16 @@ export const routes: Routes = [
                 component: PlaceComponent,
             },
             {
-                path: 'viewcomplaintandreply',
-                component: ViewcomplaintandreplyComponent,
+                path: 'complaintview',
+                component: ComplaintviewComponent,
             },
+            {
+                path: 'complaintreply',
+                component: ComplaintreplyviewComponent,
+            },
+            
+           
+            
 
 
 

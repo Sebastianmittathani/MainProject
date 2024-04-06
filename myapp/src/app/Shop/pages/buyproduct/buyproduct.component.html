@@ -20,11 +20,10 @@
               <td> {{productdata.product_details}}</td>
               <td> {{productdata.product_photo}}</td>
               <td> {{productdata.product_rate}}</td> 
-              <td><input type="text" class="form-control w-90" placeholder="" aria-label="Qantity"
+              <td><input type="number" class="form-control w-90" placeholder="" aria-label="Qantity"  (keyup)="calculate($event)"
                 aria-describedby="addon-wrapping"  formControlName="booking_qty"></td>
-              <td><input type="text" class="form-control w-90" placeholder="" aria-label="Amount"
-                aria-describedby="addon-wrapping" formControlName="booking_amount" > </td>
-                <td><input type="text" class="form-control w-90" placeholder="" aria-label="date"
+              <td>{{show}} </td>
+                <td><input type="date" class="form-control w-90" placeholder="" aria-label="date"
                     aria-describedby="addon-wrapping"  formControlName="booking_foredate"></td>
                 <td><button type="submit" class="btn btn-success"(click)="book(productdata.product_id)">book now</button></td>
               
