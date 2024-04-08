@@ -1,32 +1,66 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top ">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Jail</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <!-- <a class="nav-link active" aria-current="page" href="#">Product</a> -->
-          </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" href="#">Link</a> -->
-          </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
-          </li>
-        </ul>
-        <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
-        <div class="btn-group dropstart">
 
+
+
+
+
+
+
+
+  <!-- top navbar -->
+
+
+  <nav class="navbar  fixed-top navbar-expand-lg bg-body-tertiary p-0">
+    <div class="container-fluid main2">
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="userhome" routerLinkActive="active"
+              ariaCurrentwhenActive="page">Home</a>
+          </li>
+  
+  
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="viewjail" routerLinkActive="active"
+              style="text-decoration: none;color: black;" ariaCurrentwhenActive="page">jail</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="mybooking" routerLinkActive="active"
+              style="text-decoration: none;color: black;" ariaCurrentwhenActive="page">booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="compreply" routerLinkActive="active"
+              style="text-decoration: none;color: black;" ariaCurrentwhenActive="page">Complaint Reply</a>
+          </li> -->
+         
+       
+       
+        </ul>
+  
+        <ul class="navbar-nav  my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;margin-right: 40px;">
+          <div class="btn-group dropstart">
+            <a routerLinkActive="active" ariaCurrentwhenActive="page" style="text-decoration: none;color: black;"
+              class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="myprofile" routerLinkActive="active"
+                  ariaCurrentwhenActive="page">My Profile</a></li>
+              <li><a class="dropdown-item" routerLink="editprofile" routerLinkActive="active"
+                  ariaCurrentwhenActive="page">Edit Profile</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" routerLink="changepassword" routerLinkActive="active"
+                  ariaCurrentwhenActive="page">Change Password</a></li>
+            </ul>
+          </div>
+        </ul>
+        <div class="btn-group dropstart">
+  
           <span class="material-symbols-outlined " data-bs-toggle="dropdown" aria-expanded="false">
-            notifications_active
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+            </svg>
           </span>
   
           <ul class="dropdown-menu" style=" height: 40rem;width: 15rem;">
@@ -51,15 +85,7 @@
             </div> -->
           </ul>
         </div>
-        
-        
       </div>
     </div>
+  
   </nav>
-  <!-- top navbar -->
-  <!-- <div class="topnav shadow p-1">
-    <a>Admin DashBoard</a>
-    <span class="menu"><i class="bi bi-list"></i>
-    </span>
-  </div> -->
-  <!-- top navbar -->

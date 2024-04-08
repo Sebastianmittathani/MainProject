@@ -1,0 +1,15 @@
+.product-info {
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.highlighted-text {
+    background-color: yellow;
+    padding: 2px 5px;
+    border-radius: 5px;
+}

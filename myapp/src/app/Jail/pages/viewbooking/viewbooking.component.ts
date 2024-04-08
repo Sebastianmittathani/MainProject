@@ -12,7 +12,7 @@ interface bookdetails {
   shop_contact: any,
   shop_email: any,
   booking_id : any;
-  bookins_status : any;
+  booking_status : any;
 }
 
 @Component({

@@ -1,0 +1,32 @@
+.card-wrapper {
+    width: 40rem;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    width: 100%;
+    box-shadow: 0px 5px 15px rgba(223, 52, 52, 0.35);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.head {
+    text-align: center;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group-text {
+    width: 131px;
+}
+
+.btn {
+    width: 50%;
+}

@@ -326,12 +326,12 @@ app.post("/ShopRegister",
     var fileValue = JSON.parse(JSON.stringify(req.files));
     var photo = `http://127.0.0.1:${PORT}/images/${fileValue.shop_logo[0].filename}`;
 
-    const { place_id, shop_name, shop_contact, shop_address, shop_email, shop_licenseproof, shop_ownername, shop_username, shop_password, shop_status } = req.body
+    const { place_id, shop_name, shop_contact, shop_address, shop_email, shop_licenseproof, shop_ownername, shop_username, shop_password} = req.body
     console.log(req.body);
 
     console.log(photo);
 
-    let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password,shop_status)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "','" + shop_status + "')";
+    let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "')";
 
     console.log(qry);
     connection.query(qry, (err, result) => {
@@ -478,18 +478,21 @@ app.patch("/category/:Id", (req, res) => {
 
 
 // --------------------------------------------------PRODUCT BEGINS HERE------------------------------------------------------
-app.post("/Product", upload.fields([{ name: "product_photo", maxCount: 1 },]), (req, res) => {
-
-  var fileValue = JSON.parse(JSON.stringify(req.files));
-  var photo = `http://127.0.0.1:${PORT}/images/${fileValue.product_photo[0].filename}`;
+app.post("/Product",
+upload.fields([
+  { name: "product_photo", maxCount: 1 },
+]),
+(req, res) => {
+    var fileValue = JSON.parse(JSON.stringify(req.files));
+    var photo = `http://127.0.0.1:${PORT}/images/${fileValue.product_photo[0].filename}`;
   const { product_name, category_id, product_details, product_rate, jail_id } = req.body
-  console.log(product_name, category_id, product_details, product_rate, jail_id);
+
 
   let qry =
     "insert into tbl_product (product_name ,category_id,product_details,product_photo,product_rate,jail_id) values('" +
-    product_name + "' , '" + category_id + "', '" + product_details + "', '" + product_photo + "', '" + product_rate + "', '" + jail_id + "')";
+    product_name + "' , '" + category_id + "', '" + product_details + "', '" + photo + "', '" + product_rate + "', '" + jail_id + "')";
 
-
+console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("Error");
@@ -501,32 +504,32 @@ app.post("/Product", upload.fields([{ name: "product_photo", maxCount: 1 },]), (
   });
 });
 
-// app.post("/ShopRegister",
-//   upload.fields([
-//     { name: "shop_logo", maxCount: 1 },
-//   ]),
-//   (req, res) => {
-//     var fileValue = JSON.parse(JSON.stringify(req.files));
-//     var photo = `http://127.0.0.1:${PORT}/images/${fileValue.shop_logo[0].filename}`;
+app.post("/ShopRegister",
+  upload.fields([
+    { name: "shop_logo", maxCount: 1 },
+  ]),
+  (req, res) => {
+    var fileValue = JSON.parse(JSON.stringify(req.files));
+    var photo = `http://127.0.0.1:${PORT}/images/${fileValue.shop_logo[0].filename}`;
 
-//     const { place_id, shop_name, shop_contact, shop_address, shop_email, shop_licenseproof, shop_ownername, shop_username, shop_password, shop_status } = req.body
-//     console.log(req.body);
+    const { place_id, shop_name, shop_contact, shop_address, shop_email, shop_licenseproof, shop_ownername, shop_username, shop_password, shop_status } = req.body
+    console.log(req.body);
 
-//     console.log(photo);
+    console.log(photo);
 
-//     let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password,shop_status)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "','" + shop_status + "')";
+    let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password,shop_status)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "','" + shop_status + "')";
 
-//     console.log(qry);
-//     connection.query(qry, (err, result) => {
-//       if (err) {
-//         console.log("Error");
-//       } else {
-//         res.send({
-//           message: "Data Saved",
-//         });
-//       }
-//     });
-//   });
+    console.log(qry);
+    connection.query(qry, (err, result) => {
+      if (err) {
+        console.log("Error");
+      } else {
+        res.send({
+          message: "Data Saved",
+        });
+      }
+    });
+  });
 
 app.get("/Product", (req, res) => {
   let qry = "SELECT * FROM tbl_product INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id";

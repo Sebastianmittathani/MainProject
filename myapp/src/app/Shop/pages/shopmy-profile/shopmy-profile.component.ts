@@ -11,7 +11,6 @@ interface shopProfile {
   shop_licenseproof: any,
   shop_ownername: any,
   shop_username: any,
-  shop_status: any
   shop_logo: any,
 
 }

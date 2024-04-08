@@ -1,7 +1,7 @@
 
 
 
-
+<!-- 
   <div class="details"
     style="display: flex;flex-direction: column; align-items: center;justify-content: center;margin-top: 4rem;"
     *ngFor="let bookdata of bookdata">
@@ -23,12 +23,47 @@
         feedback
       </a>
     </h2>
-
-
-
-
-
-
-
-
   </div>
+   -->
+
+   <section id="courses" class="padding-medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-lg-3 col-xl-3 mb-5" style="width: 300px;" *ngFor="let bookdata of bookdata">
+                <div class="card rounded-4 border-0 shadow-sm p-3 position-relative">
+                    <div class="card-body p-0">
+                        <div class="d-flex justify-content-between m-0">
+                            <p class="text-black fw-bold text-uppercase m-0">Quantity: {{bookdata?.booking_qty}}</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <p class="text-black fw-bold text-uppercase m-0"> {{bookdata?.booking_foredate}}</p>
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="bookdata.booking_status === 2">
+                            <p class="text-black fw-bold text-uppercase m-0">{{bookdata?.jail_name}} rejected your request</p>
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="bookdata.booking_status === 2">
+                            <p class="text-black fw-bold text-uppercase m-0">{{bookdata?.jail_name}} accepted your request</p>
+                            <a [routerLink]="['/Shop/payment']" [queryParams]="{booking_id: bookdata.booking_id}">
+                                pay now
+                            </a>
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="bookdata.booking_status === 3">
+                            <p class="text-black fw-bold text-uppercase m-0"> {{bookdata?.jail_name}} Paid</p>
+                        </div>
+                        <div *ngIf="bookdata.booking_status === 3">
+                            <div class="d-flex align-items-center">
+                                <a [routerLink]="['/Shop/postcomplaint']" [queryParams]="{booking_id: bookdata.booking_id}">
+                                    Complaint
+                                </a>
+                                <span style="margin: 0 10px;"></span> <!-- Space between the links -->
+                                <a [routerLink]="['/Shop/postfeedback']" [queryParams]="{booking_id: bookdata.booking_id}">
+                                    Feedback
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

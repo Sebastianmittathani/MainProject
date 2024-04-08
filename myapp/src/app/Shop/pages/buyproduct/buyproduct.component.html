@@ -1,7 +1,7 @@
-<form [formGroup]="bookForm" class="main">
+<!-- <form [formGroup]="bookForm" class="main"> -->
 
 
-    <div class="tablediv">
+    <!-- <div class="tablediv">
         <table class="table ">
           <thead>
             <tr>
@@ -32,5 +32,90 @@
             
           </tbody>
         </table>
-      </div>
-</form>
+      </div> -->
+
+      <section id="courses" class="padding-medium">
+        <div class="container">
+          <form [formGroup]="bookForm" class="main">
+          <div class="row">
+            <div class="col-sm-6 col-lg-3 col-xl-3 mb-5" style="width: 300px;" >
+            
+              <div class="card rounded-4 border-0 shadow-sm p-3 position-relative">
+                <div class="card-body p-0">
+      
+                  
+                  <div class="d-flex align-items-center">
+                     <img src="{{productdata.product_photo}}" width="200">
+                  </div>
+                  <!-- <div class="d-flex justify-content-between m-0">
+                    <p class="text-black fw-bold text-uppercase m-0">Product {{productdata.product_name}}</p>
+                  </div>
+                  <div class="d-flex align-items-center" style="height: 50px;">
+                    <p class="text-black fw-bold text-uppercase m-0">Details  {{productdata.product_details}}</p>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <p class="text-black fw-bold text-uppercase m-0">rate  {{productdata.product_rate}}</p>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    Qauntity:<input type="number"  placeholder="" aria-label="Qantity"  (keyup)="calculate($event)"
+                    aria-describedby="addon-wrapping"  formControlName="booking_qty">
+                  </div>
+                  <div class="d-flex align-items-center" style="height: 50px;">
+                    <span style="background-color: yellow;">Rs</span> {{show}} 
+                </div>
+                
+                  <div class="d-flex align-items-center"  style="height: 50px;">
+                    Date :<input type="date"  placeholder="" aria-label="date"
+                    aria-describedby="addon-wrapping"  formControlName="booking_foredate">
+                  </div>
+                  <div class="button-container" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-success" type="submit" (click)="book(productdata.product_id)">book now</button>
+                </div> -->
+                <div class="product-info">
+                  <div class="info-row">
+                      <p class="text-black fw-bold text-uppercase m-0">Product: {{ productdata.product_name }}</p>
+                  </div>
+                  <div class="info-row">
+                      <p class="text-black fw-bold text-uppercase m-0">Details: {{ productdata.product_details }}</p>
+                  </div>
+                  <div class="info-row">
+                      <p class="text-black fw-bold text-uppercase m-0">Rate: {{ productdata.product_rate }}</p>
+                  </div>
+                  <div class="info-row">
+                      <p class="text-black fw-bold text-uppercase m-0">Quantity: 
+                          <input type="number" placeholder="" aria-label="Quantity" (keyup)="calculate($event)" aria-describedby="addon-wrapping" formControlName="booking_qty">
+                      </p>
+                  </div>
+                  <div class="info-row">
+                      <p class="text-black fw-bold text-uppercase m-0">Total: 
+                          <span class="highlighted-text">Rs {{ show }}</span>
+                      </p>
+                  </div>
+                  <div class="info-row">
+                      <p class="text-black fw-bold text-uppercase m-0">Date: 
+                          <input type="date" placeholder="" aria-label="Date" aria-describedby="addon-wrapping" formControlName="booking_foredate">
+                      </p>
+                  </div>
+                  <div class="button-container" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-success" type="submit" (click)="book(productdata.product_id)">book now</button>
+                </div> 
+              </div>
+              
+                
+                  
+
+      
+                 
+      
+                
+      
+                </div>
+              </div>
+            </div>
+          
+          </div>
+          </form>
+      
+         
+        </div>
+      </section>

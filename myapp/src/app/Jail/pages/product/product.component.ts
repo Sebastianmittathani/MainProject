@@ -41,6 +41,8 @@ interface productfetch {
 })
 export class ProductComponent {
 
+  filedata: any
+
   productdata: productfetch[] = [];
   catdata: categoryfetch[] = [];
   check: number = 0
@@ -62,6 +64,11 @@ export class ProductComponent {
 
   var: any = ''
   productfetch: any;
+
+  handleFile(event: any) {
+    this.filedata = event.target.files[0]
+
+  }
   onSubmit() {
     console.log(this.productForm.value);
     const productdata: productInterface = {
@@ -74,9 +81,24 @@ export class ProductComponent {
 
 
     };
+
+    const userformdata = new FormData();
+
+
+    userformdata.append('product_photo', this.filedata);
+    userformdata.append('product_name', productdata.product_name);
+    userformdata.append('product_rate', productdata.product_rate);
+    userformdata.append('product_details', productdata.product_details);
+    userformdata.append('category_id', productdata.category_id);
+    userformdata.append('jail_id', productdata.jail_id);
+    
+    
+
+
     if (this.check === 0) {
-      axios.post('http://localhost:5000/Product/', productdata).then((response) => {
+      axios.post('http://localhost:5000/Product/', userformdata).then((response) => {
         console.log(response.data);
+        this.fetchproduct();
       })
     }
     else {

@@ -19,12 +19,12 @@
     </select>
   </div> -->
 
-<div class="tablediv">
+<!-- <div class="tablediv">
     <table class="table ">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <!-- <th scope="col">District</th> -->
+              
                 <th scope="col">jail name</th>
                 <th scope="col">contact</th>
                 <th scope="col">email</th>
@@ -35,13 +35,13 @@
         <tbody>
             <tr *ngFor="let item of jaildata;let i = index">
                 <th scope="row">{{ i + 1 }}</th>
-                <!-- <td>{{ item.district_name }}</td> -->
+               
                 <td>{{ item.jail_name }}</td>
                 <td>{{ item.jail_contact }}</td>
                 <td>{{ item.jail_email }}</td>
                 <td>{{ item.jail_address }}</td>
                 <td>
-                    <!-- <a routerLink="viewproduct" routerLinkActive="active" ariaCurrentWhenActive="page">view product</a> -->
+                    
                     <a [routerLink]="['/Shop/viewproduct']" [queryParams]="{jail_id: item.jail_id}">
                       view product
                     </a>
@@ -49,4 +49,43 @@
             </tr>
         </tbody>
     </table>
-</div>
+</div> -->
+
+
+<section id="courses" class="padding-medium">
+  <div class="container">
+  
+    <div class="row">
+      <div class="col-sm-6 col-lg-3 col-xl-3 mb-5" style="width: 300px;" *ngFor="let item of jaildata;let i = index">
+      
+        <div class="card rounded-4 border-0 shadow-sm p-3 position-relative">
+          <div class="card-body p-0">
+
+            <div class="d-flex justify-content-between m-0">
+              <p class="text-black fw-bold text-uppercase m-0">  {{ item.jail_name }}</p>
+            </div>
+            <div class="d-flex align-items-center">
+              <p class="text-black fw-bold text-uppercase m-0">  {{ item.jail_contact }}</p>
+            </div>
+            <div class="d-flex align-items-center">
+              <p class="text-black fw-bold text-uppercase m-0">  {{ item.jail_email }}</p>
+            </div>
+            <div class="d-flex align-items-center">
+              <p class="text-black fw-bold text-uppercase m-0">  {{ item.jail_address }}</p>
+            </div>
+
+            <a [routerLink]="['/Shop/viewproduct']" [queryParams]="{jail_id: item.jail_id}" class="btn btn-link">
+              view product
+            </a>
+
+          
+
+          </div>
+        </div>
+      </div>
+    
+    </div>
+
+   
+  </div>
+</section>

@@ -1,4 +1,4 @@
-<div class="main">
+<!-- <div class="main">
     <div class="card">
       <div class="img">
         <img src="{{ shopdata?.shop_logo}}" alt="" style="height: 10rem;width: 10rem;">
@@ -13,11 +13,84 @@
         <h2>ownerName: {{shopdata?.shop_ownername}}</h2>
         <h2>User Name: {{shopdata?.shop_username}}</h2>
         <h2>LicenseProof: {{shopdata?.shop_licenseproof}}</h2>
-        <h2>Status: {{shopdata?.shop_status}}</h2>
+    
        
         <h2>Address:{{shopdata?.shop_address}}</h2>
        
         
   
     </div>
-  </div>
+  </div> -->
+
+  <section id="courses" class="padding-medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-lg-4 col-xl-4 mb-5" style="width: 350px;">
+                <div class="card rounded-4 border-0 shadow-sm p-4 position-relative">
+                    <div class="card-body p-0">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ shopdata?.shop_logo}}" width="200">
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-4 pr-0">
+                                <p class="text-black fw-bold text-uppercase m-0">Name:</p>
+                            </div>
+                            <div class="col-8 pl-0">
+                                <p class="text-black fw-bold text-uppercase m-0">{{shopdata?.shop_name}}</p>
+                            </div>
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-4 pr-0">
+                                <p class="text-black fw-bold text-uppercase m-0">Email:</p>
+                            </div>
+                            <div class="col-8 pl-0">
+                                <p class="text-black fw-bold text-uppercase m-0">{{shopdata?.shop_email}}</p>
+                            </div>
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-4 pr-0">
+                                <p class="text-black fw-bold text-uppercase m-0">Contact:</p>
+                            </div>
+                            <div class="col-8 pl-0">
+                                <p class="text-black fw-bold text-uppercase m-0">{{shopdata?.shop_contact}}</p>
+                            </div>
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-4 pr-0">
+                                <p class="text-black fw-bold text-uppercase m-0">Owner Name:</p>
+                            </div>
+                            <div class="col-8 pl-0">
+                                <p class="text-black fw-bold text-uppercase m-0">{{shopdata?.shop_ownername}}</p>
+                            </div>
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-4 pr-0">
+                                <p class="text-black fw-bold text-uppercase m-0">User Name:</p>
+                            </div>
+                            <div class="col-8 pl-0">
+                                <p class="text-black fw-bold text-uppercase m-0">{{shopdata?.shop_username}}</p>
+                            </div>
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-4 pr-0">
+                                <p class="text-black fw-bold text-uppercase m-0">License Proof:</p>
+                            </div>
+                            <div class="col-8 pl-0">
+                                <p class="text-black fw-bold text-uppercase m-0">{{shopdata?.shop_licenseproof}}</p>
+                            </div>
+                        </div>
+                        <div class="row m-0 mb-3">
+                            <div class="col-4 pr-0">
+                                <p class="text-black fw-bold text-uppercase m-0">Address:</p>
+                            </div>
+                            <div class="col-8 pl-0">
+                                <p class="text-black fw-bold text-uppercase m-0">{{shopdata?.shop_address}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
