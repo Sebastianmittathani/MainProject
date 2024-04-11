@@ -316,7 +316,7 @@ app.patch("/Place/:Id", (req, res) => {
 
 
 
-// ----------------------------------------------------------SHOP REGISTRATION  BEGINS HERE-----------------------------------------------------------
+// SHOP REGISTRATION  BEGINS HERE
 
 app.post("/ShopRegister",
   upload.fields([
@@ -326,12 +326,12 @@ app.post("/ShopRegister",
     var fileValue = JSON.parse(JSON.stringify(req.files));
     var photo = `http://127.0.0.1:${PORT}/images/${fileValue.shop_logo[0].filename}`;
 
-    const { place_id, shop_name, shop_contact, shop_address, shop_email, shop_licenseproof, shop_ownername, shop_username, shop_password} = req.body
+    const { place_id, shop_name, shop_contact, shop_address, shop_email, shop_licenseproof, shop_ownername,  shop_password} = req.body
     console.log(req.body);
 
     console.log(photo);
 
-    let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_username,shop_password)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_username + "','" + shop_password + "')";
+    let qry = "insert into tbl_shop (place_id,shop_name,shop_contact,shop_address,shop_email,shop_logo,shop_licenseproof,shop_ownername,shop_password)values('" + place_id + "','" + shop_name + "','" + shop_contact + "','" + shop_address + "','" + shop_email + "','" + photo + "','" + shop_licenseproof + "','" + shop_ownername + "','" + shop_password + "')";
 
     console.log(qry);
     connection.query(qry, (err, result) => {
@@ -388,7 +388,7 @@ app.patch("/ShopRegister/:Id", (req, res) => {
     }
   });
 });
-// ----------------------------------------------------------SHOP REGISTRATION ENDS HERE-----------------------------------------------------------
+// SHOP REGISTRATION ENDS HERE
 
 
 // ------------------------------------------------------------ CATEGORY BEGINS HERE---------------------------------------------------------
@@ -608,10 +608,10 @@ app.patch("/Product/:Id", (req, res) => {
   });
 });
 
-// --------------------------------------------------PRODUCT ENDS HERE------------------------------------------------------
+// PRODUCT ENDS HERE
 
 
-// ----------------------------------------------JAIL REGISTRATION BEGINS HERE------------------------------------------------------
+// JAIL REGISTRATION BEGINS HERE
 app.post("/CentralJail", (req, res) => {
   const { jail_name, district_id, jail_contact, jail_address, jail_email, jail_username, jail_password } = req.body
   console.log(jail_name, district_id, jail_contact, jail_address, jail_email, jail_username, jail_password);
@@ -636,6 +636,21 @@ app.post("/CentralJail", (req, res) => {
 app.get("/CentralJail/:Id", (req, res) => {
   const Id = req.params.Id
   let qry = "SELECT * FROM tbl_jail INNER JOIN tbl_district ON tbl_jail.district_id = tbl_district.district_id";
+  console.log(qry);
+  connection.query(qry, (err, result) => {
+    if (err) {
+      console.log("error");
+    } else {
+      res.send({
+        jail: result,
+      });
+    }
+  });
+});
+
+app.get("/CentralJail", (req, res) => {
+  let qry = "SELECT * FROM tbl_jail INNER JOIN tbl_district ON tbl_jail.district_id = tbl_district.district_id";
+  console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("error");
@@ -649,9 +664,11 @@ app.get("/CentralJail/:Id", (req, res) => {
 
 
 
+
+
 app.delete("/Jail/:Id", (req, res) => {
   const Id = req.params.Id
-  let qry = "delete from tbl_jail where jail_id = " + Id;
+  let qry = " delete from tbl_jail where jail_id = " + Id;
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("error");
@@ -666,11 +683,10 @@ app.delete("/Jail/:Id", (req, res) => {
 
 
 
+//  JAIL REGISTRATION ENDE HERE
 
-// ---------------------------------------------------------JAIL REGISTRATION ENDE HERE------------------------------------------------------
 
-
-// ----------------------------------------------------------LOGIN STARTS HERE---------------------------------------------------------------------
+//   LOGIN STARTS HERE 
 app.post("/Login", (req, res) => {
   let selAdmin = "select * from tbl_admin where admin_email='" + req.body.email + "' and admin_password='" + req.body.password + "'";
   let seljail = "select * from tbl_jail where jail_email='" + req.body.email + "' and jail_password='" + req.body.password + "'";
@@ -723,26 +739,22 @@ app.post("/Login", (req, res) => {
 
 //  PRISIONER REGISTRATION BEGINS HERE
 app.post("/Prisioner", (req, res) => {
-  const { prisioner_name, jail_id, prisioner_gender, prisioner_address, prisioner_contact, prisioner_email, prisioner_photo, prisioner_code,
-    prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate, prisioner_status } = req.body
+  const { prisioner_name, jail_id, prisioner_gender, prisioner_contact,  prisioner_code,
+    prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate } = req.body
   // console.log(prisioner_name, jail_id, prisioner_gender, prisioner_address, prisioner_contact, prisioner_email, prisioner_photo, prisioner_code,
   //   prisioner_crimedetails, prisioner_duration, prisioner_joindate, prisioner_releasedate, prisioner_status);
 
   let qry =
-    "insert into tbl_prisioner (prisioner_name ,jail_id,prisioner_gender,prisioner_address,prisioner_contact,prisioner_email,prisioner_photo,prisioner_code,prisioner_crimedetails,prisioner_duration,prisioner_joindate,prisioner_releasedate,prisioner_status) values('"
+    "insert into tbl_prisioner (prisioner_name ,jail_id,prisioner_gender,prisioner_contact,prisioner_code,prisioner_crimedetails,prisioner_duration,prisioner_joindate,prisioner_releasedate) values('"
     + prisioner_name + "' ,'"
     + jail_id + "', '"
     + prisioner_gender + "', '"
-    + prisioner_address + "', '"
-    + prisioner_contact + "', '"
-    + prisioner_email + "', '"
-    + prisioner_photo + "', '"
+    + prisioner_contact + "',  '"
     + prisioner_code + "', '"
     + prisioner_crimedetails + "', '"
     + prisioner_duration + "', '"
     + prisioner_joindate + "', '"
-    + prisioner_releasedate + "', '"
-    + prisioner_status + "')";
+    + prisioner_releasedate + "')";
   // console.log(qry);
 
 
@@ -757,7 +769,9 @@ app.post("/Prisioner", (req, res) => {
   });
 });
 app.get("/Prisioner", (req, res) => {
-  let qry = "SELECT * FROM tbl_prisioner";
+   let qry = "SELECT * FROM tbl_prisioner ";
+ 
+  console.log(qry);
   console.log(res);
   connection.query(qry, (err, result) => {
     if (err) {
@@ -771,7 +785,7 @@ app.get("/Prisioner", (req, res) => {
 });
 app.get("/updateprisioner/:id", (req, res) => {
   const id = req.params.id
-  let qry = "SELECT * FROM tbl_prisioner where jail_id =" + id;
+  let qry = "SELECT * FROM tbl_prisioner  where jail_id =" + id;
   connection.query(qry, (err, result) => {
     if (err) {
       console.log("error");
@@ -1149,33 +1163,7 @@ app.patch("/bookreject/:Id", (req, res) => {
 });
 
 
-// app.patch("/infoaccept/:Id", (req, res) => {
-//   const id = req.params.Id
-//   let qry = "update tbl_apply set apply_status = 1,notificationstatus_info = 0  where apply_id = " + id;
-//   db.query(qry, (err, result) => {
-//     if (err) {
-//       console.log("Error");
-//     } else {
-//       res.send({
-//         message: "Data updated",
-//       });
-//     }
-//   });
-// });
 
-// app.patch("/inforeject/:Id", (req, res) => {
-//   const id = req.params.Id
-//   let qry = "update tbl_apply set apply_status = 2,notificationstatus_info = 0  where apply_id = " + id;
-//   db.query(qry, (err, result) => {
-//     if (err) {
-//       console.log("Error");
-//     } else {
-//       res.send({
-//         message: "Data updated",
-//       });
-//     }
-//   });
-// });
 
 
 
@@ -1185,7 +1173,7 @@ app.patch("/bookreject/:Id", (req, res) => {
 
 app.get("/bookingreply/:id", (req, res) => {
   const id = req.params.id;
-  let qry = "select * from tbl_booking where shop_id = " + id  
+  let qry = "select * from tbl_booking b INNER JOIN tbl_product p ON p.product_id = b.product_id INNER JOIN tbl_jail j ON j.jail_id = p.jail_id  where b.shop_id = " + id  
   console.log(qry);
   connection.query(qry, (err, result) => {
     if (err) {

@@ -1,12 +1,60 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import axios from 'axios';
+
+interface complaintfetch {
+  complaint_title: any;
+  complaint_details: any;
+  complaint_id: any;
+  product_name: any;
+  jail_name:any;
+  shop_name:any;
+  complaint_reply: any;
+
+}
 
 @Component({
   selector: 'app-complaintreplyview',
   standalone: true,
-  imports: [],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './complaintreplyview.component.html',
   styleUrl: './complaintreplyview.component.css'
 })
 export class ComplaintreplyviewComponent {
+
+  complaintdata:complaintfetch[] = [];
+  sid: any;
+  complaint_id :any
+  replyId: any;
+  product_name: any
+
+  
+
+  ngOnInit() {
+  
+
+    this.complaintfetch()
+
+  }
+
+
+  complaintfetch() {
+
+
+
+
+    axios.get('http://localhost:5000/viewcomplaintreplyAdmin/').then((response) => {
+      console.log(response.data.complaintdata)
+
+      this.complaintdata = response.data.complaintdata
+      console.log(response.data.complaintdata);
+      
+
+
+
+
+    })
+  }
 
 }

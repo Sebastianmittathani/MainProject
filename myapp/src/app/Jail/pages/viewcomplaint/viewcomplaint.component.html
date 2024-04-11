@@ -1,50 +1,43 @@
 <div class="main">
-    <div class="card">
-        <!-- <div class="img">
-        <img src="{{ shopdata?.shop_logo}}" alt="" style="height: 10rem;width: 10rem;">
-      </div> -->
-
-
-        <div class="details"
-            style="display: flex;flex-direction: column; align-items: center;justify-content: center;margin-top: 8rem;"
-            *ngFor="let item of complaintdata">
-            <h2>Product : {{item?.product_name}}</h2>
-            <h2>complaint title : {{item?.complaint_title}}</h2>
-            <h2>complaint details : {{item?.complaint_details}}</h2>
-            <h2>complaint reply :</h2>
-
-
-            <div class="btn">
-                <button  class="btn btn-success"  (click)="reply(item.complaint_id)"  data-toggle="modal" data-target="#exampleModal">Reply</button>
-            </div>
-
-          
-
-
-        </div>
+    <div class="card" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Shop</th>
+                    <th>Complaint Title</th>
+                    <th>Complaint Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of complaintdata" style="cursor: pointer;" (mouseenter)="hover=true" (mouseleave)="hover=false" [ngClass]="{'table-hover': hover}">
+                    <td>{{item?.product_name}}</td>
+                    <td>{{item?.shop_name}}</td>
+                    <td>{{item?.complaint_title}}</td>
+                    <td>{{item?.complaint_details}}</td>
+                    <td>
+                        <button class="btn btn-success" (click)="reply(item.complaint_id)" data-toggle="modal" data-target="#exampleModal">Reply</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <div [formGroup]="replyForm" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Enter Complaint Reply</h5>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button> -->
-        <textarea name="" id="" formControlName="complaint_reply" style="width: 29rem;"></textarea>
-
-            </div>
-
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="rep()">Send </button>
+    <div [formGroup]="replyForm" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Enter Complaint Reply</h5>
+                    <textarea name="" id="" formControlName="complaint_reply" class="form-control"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="rep()">Send</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-    <!-- Modal -->
+
 
    
-    <!-- <button  (click)="apply(item.info_id)" type="submit" class="btn btn-outline-success" >request</button> -->

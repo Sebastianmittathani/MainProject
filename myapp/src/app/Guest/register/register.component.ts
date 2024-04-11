@@ -84,49 +84,150 @@ export class RegisterComponent {
 
   }
   onSubmit() {
-
-    const UserData: shopregisterInterface = {
-      place_id: this.shopForm.value.place_id,
-      district_id: this.shopForm.value.district_id,
-      shop_name: this.shopForm.value.shop_name,
-      shop_email: this.shopForm.value.shop_email,
-      shop_contact: this.shopForm.value.shop_contact,
-      shop_address: this.shopForm.value.shop_address,
-      shop_licenseproof: this.shopForm.value.shop_licenseproof,
-      shop_ownername: this.shopForm.value.shop_ownername,
-      shop_username: this.shopForm.value.shop_username,
-      shop_password: this.shopForm.value.shop_password,
-      shop_status: this.shopForm.value.shop_status,
-      shop_logo: this.shopForm.value.shop_logo,
-    };
-
-    const userformdata = new FormData();
-
-
-    userformdata.append('shop_logo', this.filedata);
-    userformdata.append('place_id', UserData.place_id);
-    userformdata.append('shop_name', UserData.shop_name);
-    userformdata.append('shop_email', UserData.shop_email);
-    userformdata.append('shop_contact', UserData.shop_contact);
-    userformdata.append('shop_address', UserData.shop_address);
-    userformdata.append('shop_licenseproof', UserData.shop_licenseproof);
-    userformdata.append('shop_ownername', UserData.shop_ownername);
-    userformdata.append('shop_username', UserData.shop_username);
-    userformdata.append('shop_password', UserData.shop_password);
-    userformdata.append('shop_status', UserData.shop_status);
+    if (this.shopForm.valid) {
+      const password = this.shopForm.value.shop_password;
+      const input = this.shopForm.value.shop_name;
+      const number = this.shopForm.value.shop_contact;
+      const email = this.shopForm.value.shop_email;
+      const ownername = this.shopForm.value.shop_ownername;
 
 
 
+      if (!password) {
+        alert("Password is required.");
+        return;
+      }
+
+      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+      const isPasswordValid = passwordRegex.test(password);
+
+      if (!isPasswordValid) {
+        alert("Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+        return;
+      }
+
+      // Check if the input is empty
+      if (!ownername) {
+        alert("Input is required.");
+        return;
+      }
+
+      // Extract the first word from the input
+      const SecondWord = ownername.trim().split(/\s+/)[0];
+
+      // Check if the first word starts with a capital letter
+      const isSecondWordCapitalized = /^[A-Z].*/.test(SecondWord);
+
+      if (!isSecondWordCapitalized) {
+        alert("The first word must start with a capital letter.");
+        return;
+      }
+
+      // Check if the input is empty
+      if (!number) {
+        alert("Phone number is required.");
+        return;
+      }
+
+
+
+      // Check if the phone number has 10 digits
+      const isValidPhoneNumber = /^\d{10}$/.test(number);
+
+      if (!isValidPhoneNumber) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
+      }
+
+     
+      // Check if the input is empty
+      if (!email) {
+        alert("Email is required.");
+      } else {
+        // Check if the input matches the email pattern
+        const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (isValidEmail) {
+          alert("The email address is valid.");
+        } else {
+          alert("Please enter a valid email address.");
+        }
+      }
+
+      // Check if the input is empty
+      if (!input) {
+        alert("Input is required.");
+        return;
+      }
+
+      // Extract the first word from the input
+      const firstWord = input.trim().split(/\s+/)[0];
+
+      // Check if the first word starts with a capital letter
+      const isFirstWordCapitalized = /^[A-Z].*/.test(firstWord);
+
+      if (!isFirstWordCapitalized) {
+        alert("The first word must start with a capital letter.");
+        return;
+      }
 
 
 
 
-    axios.post('http://localhost:5000/ShopRegister/', userformdata).then((response) => {
-      // console.log(response.data);
-      alert(response.data.message)
-      this.shopForm.reset();
-    })
+
+
+
+      const UserData: shopregisterInterface = {
+        place_id: this.shopForm.value.place_id,
+        district_id: this.shopForm.value.district_id,
+        shop_name: this.shopForm.value.shop_name,
+        shop_email: this.shopForm.value.shop_email,
+        shop_contact: this.shopForm.value.shop_contact,
+        shop_address: this.shopForm.value.shop_address,
+        shop_licenseproof: this.shopForm.value.shop_licenseproof,
+        shop_ownername: this.shopForm.value.shop_ownername,
+        shop_username: this.shopForm.value.shop_username,
+        shop_password: this.shopForm.value.shop_password,
+        shop_status: this.shopForm.value.shop_status,
+        shop_logo: this.shopForm.value.shop_logo,
+      };
+
+
+
+
+
+      const userformdata = new FormData();
+
+
+      userformdata.append('shop_logo', this.filedata);
+      userformdata.append('place_id', UserData.place_id);
+      userformdata.append('shop_name', UserData.shop_name);
+      userformdata.append('shop_email', UserData.shop_email);
+      userformdata.append('shop_contact', UserData.shop_contact);
+      userformdata.append('shop_address', UserData.shop_address);
+      userformdata.append('shop_licenseproof', UserData.shop_licenseproof);
+      userformdata.append('shop_ownername', UserData.shop_ownername);
+      userformdata.append('shop_username', UserData.shop_username);
+      userformdata.append('shop_password', UserData.shop_password);
+      userformdata.append('shop_status', UserData.shop_status);
+
+
+
+
+
+
+
+      axios.post('http://localhost:5000/ShopRegister/', userformdata).then((response) => {
+        // console.log(response.data);
+        alert(response.data.message)
+        this.shopForm.reset();
+      })
+    } else {
+      alert("Please fill out all required fields correctly.");
+
+    }
   }
+
   ngOnInit() {
     this.districtFetch()
   }

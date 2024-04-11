@@ -58,3 +58,36 @@
 .tablediv{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+.tablediv {
+    margin-top: 20px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn {
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.hover-effect:hover {
+    background-color: #f0f0f0; /* Change the background color on hover */
+    cursor: pointer; /* Optionally, change cursor to pointer */
+    /* Add any other styles you want to apply on hover */
+}
+

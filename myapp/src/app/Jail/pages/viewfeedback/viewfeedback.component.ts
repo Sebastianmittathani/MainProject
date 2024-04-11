@@ -8,6 +8,7 @@ interface feedbackfetch {
   feedback_details: any;
   feedback_id: any;
   product_name:any;
+  shop_name:any;
 
 }
 

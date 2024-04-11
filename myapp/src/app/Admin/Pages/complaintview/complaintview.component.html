@@ -1,26 +1,24 @@
 <div class="main">
-    <div class="card">
-        <!-- <div class="img">
-        <img src="{{ shopdata?.shop_logo}}" alt="" style="height: 10rem;width: 10rem;">
-      </div> -->
-
-
-        <div class="details"
-            style="display: flex;flex-direction: column; align-items: center;justify-content: center;margin-top: 8rem;"
-            *ngFor="let item of complaintdata">
-            <h2>Shop Name : {{item?.shop_name}}</h2>
-            <h2>Product : {{item?.product_name}}</h2>
-            <h2>complaint title : {{item?.complaint_title}}</h2>
-            <h2>complaint details : {{item?.complaint_details}}</h2>
-            <h2>Jail Name : {{item?.jail_name}}</h2>
-            <h2>complaint reply :{{item?.complaint_reply}}</h2>
-
-
-           
-
-          
-
-
-        </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Shop Name</th>
+                    <th>Product</th>
+                    <th>Complaint Title</th>
+                    <th>Complaint Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of complaintdata">
+                    <td>{{ item?.shop_name }}</td>
+                    <td>{{ item?.product_name }}</td>
+                    <td>{{ item?.complaint_title }}</td>
+                    <td>{{ item?.complaint_details }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
+
 

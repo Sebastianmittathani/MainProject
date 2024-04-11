@@ -93,7 +93,7 @@
                   </div>
                   <div class="info-row">
                       <p class="text-black fw-bold text-uppercase m-0">Date: 
-                          <input type="date" placeholder="" aria-label="Date" aria-describedby="addon-wrapping" formControlName="booking_foredate">
+                          <input type="date" placeholder="" aria-label="Date" aria-describedby="addon-wrapping" formControlName="booking_foredate"  [min]="minDate()" >
                       </p>
                   </div>
                   <div class="button-container" style=" display: flex; justify-content: center; align-items: center;">

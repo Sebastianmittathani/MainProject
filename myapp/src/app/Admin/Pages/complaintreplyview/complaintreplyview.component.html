@@ -1,1 +1,27 @@
-<p>complaintreplyview works!</p>
+<div class="main">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Shop Name</th>
+                    <th>Product</th>
+                    <th>Complaint Title</th>
+                    <th>Complaint Details</th>
+                    <th>Jail Name</th>
+                    <th>Complaint Reply</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of complaintdata">
+                    <td>{{ item?.shop_name }}</td>
+                    <td>{{ item?.product_name }}</td>
+                    <td>{{ item?.complaint_title }}</td>
+                    <td>{{ item?.complaint_details }}</td>
+                    <td>{{ item?.jail_name }}</td>
+                    <td>{{ item?.complaint_reply }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

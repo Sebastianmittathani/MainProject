@@ -10,6 +10,7 @@
 .navbar-box{
     grid-area: area1;
     height: 100px;
+    z-index: 1;
 }
 .sidebar-box{
     grid-area: area2;

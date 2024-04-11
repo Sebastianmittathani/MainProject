@@ -50,6 +50,7 @@ export class BuyproductComponent {
       // Use the 'msg' value here
     });
     this.bookproduct();
+    this.minDate()
   }
 
   bookproduct() {
@@ -100,7 +101,15 @@ export class BuyproductComponent {
     let value = event.target.value;
     this.show = value * this.price
   }
+  minDate() {
+    // Get today's date
+    const today = new Date();
 
+    // Format date to ISO format (YYYY-MM-DD)
+    const formattedDate = today.toISOString().split('T')[0];
+
+    return formattedDate;
+}
  
 
 }

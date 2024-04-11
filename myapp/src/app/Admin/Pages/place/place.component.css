@@ -28,3 +28,15 @@
     display: flex;
 
 }
+
+.tablediv {
+    margin-top: 20px;
+}
+
+.table {
+    width: 100%;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}

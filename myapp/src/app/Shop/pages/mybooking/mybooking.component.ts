@@ -10,6 +10,8 @@ interface booking {
   booking_id : any;
   jail_name : any;
   booking_status: any;
+  product_name: any;
+  booking_amount:any;
 }
 
 @Component({

@@ -1,32 +1,46 @@
 
 
 
-<!-- 
-  <div class="details"
-    style="display: flex;flex-direction: column; align-items: center;justify-content: center;margin-top: 4rem;"
-    *ngFor="let bookdata of bookdata">
 
+<div class="tablediv">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>ForeDate</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bookdata of bookdata">
+                <td>{{ bookdata?.product_name }}</td>
+                <td>{{ bookdata?.booking_qty }}</td>
+                <td>{{ bookdata?.booking_amount }}</td>
+                <td>{{ bookdata?.booking_foredate }}</td>
+                <td>
+                    <ng-container *ngIf="bookdata.booking_status === 1">
+                        {{ bookdata?.jail_name }} accepted your request
+                        <a [routerLink]="['/Shop/payment']" [queryParams]="{ booking_id: bookdata.booking_id }">pay now</a>
+                    </ng-container>
+                    <ng-container *ngIf="bookdata.booking_status === 2">
+                        {{ bookdata?.jail_name }} rejected your request
+                    </ng-container>
+                    <ng-container *ngIf="bookdata.booking_status === 3">
+                        Paid to  {{ bookdata?.jail_name }}
+                        <a [routerLink]="['/Shop/postcomplaint']" [queryParams]="{ booking_id: bookdata.booking_id }">complaint</a>
+                        <a [routerLink]="['/Shop/postfeedback']" [queryParams]="{ booking_id: bookdata.booking_id }">feedback</a>
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-    <h2>Quantity : {{bookdata?.booking_qty}}</h2>
-    <h2>ForeDate : {{bookdata?.booking_foredate}}</h2>
-    <h2 *ngIf="bookdata.booking_status === 1">{{bookdata?.jail_name}} accepted your request
-      <a [routerLink]="['/Shop/payment']" [queryParams]="{booking_id: bookdata.booking_id}">
-        pay now
-      </a>
-    </h2>
-    <h2 *ngIf="bookdata.booking_status === 2">{{bookdata?.jail_name}} rejected your request</h2>
-    <h2 *ngIf="bookdata.booking_status === 3">{{bookdata?.jail_name}} Paid
-      <a [routerLink]="['/Shop/postcomplaint']" [queryParams]="{booking_id: bookdata.booking_id}">
-        complaint
-      </a>
-      <a [routerLink]="['/Shop/postfeedback']" [queryParams]="{booking_id: bookdata.booking_id}">
-        feedback
-      </a>
-    </h2>
-  </div>
-   -->
+  
 
-   <section id="courses" class="padding-medium">
+   <!-- <section id="courses" class="padding-medium">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-3 col-xl-3 mb-5" style="width: 300px;" *ngFor="let bookdata of bookdata">
@@ -55,7 +69,7 @@
                                 <a [routerLink]="['/Shop/postcomplaint']" [queryParams]="{booking_id: bookdata.booking_id}">
                                     Complaint
                                 </a>
-                                <span style="margin: 0 10px;"></span> <!-- Space between the links -->
+                                <span style="margin: 0 10px;"></span> 
                                 <a [routerLink]="['/Shop/postfeedback']" [queryParams]="{booking_id: bookdata.booking_id}">
                                     Feedback
                                 </a>
@@ -66,4 +80,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
