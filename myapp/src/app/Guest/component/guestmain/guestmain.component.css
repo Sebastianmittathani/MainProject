@@ -1,0 +1,43 @@
+/* Custom CSS for styling */
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+.inquiry-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #333; /* Customize carousel control button color */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: auto;
+}
+
+.carousel-control-prev {
+    left: -30px;
+}
+
+.carousel-control-next {
+    right: -30px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background: none;
+}
+
+.carousel-inner img {
+    object-fit: cover;
+}

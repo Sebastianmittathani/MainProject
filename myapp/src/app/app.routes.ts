@@ -31,6 +31,8 @@ import { ViewfeedbackComponent } from './Jail/pages/viewfeedback/viewfeedback.co
 import { CompreplyComponent } from './Shop/pages/compreply/compreply.component';
 import { ComplaintviewComponent } from './Admin/Pages/complaintview/complaintview.component';
 import { ComplaintreplyviewComponent } from './Admin/Pages/complaintreplyview/complaintreplyview.component';
+import { GuestmainComponent } from './Guest/component/guestmain/guestmain.component';
+import { GuesthomepageComponent } from './Guest/component/guesthomepage/guesthomepage.component';
 
 
 export const routes: Routes = [
@@ -142,7 +144,17 @@ export const routes: Routes = [
     },
     {
         path: 'Guest',
+        component:GuestmainComponent,
         children: [
+            {
+                path: '',
+                redirectTo:'guesthome',
+                pathMatch:'full',
+            }, 
+            {
+                path: 'guesthome',
+                component: GuesthomepageComponent,
+            }, 
             {
                 path: 'ShopRegister',
                 component: RegisterComponent,
@@ -150,7 +162,8 @@ export const routes: Routes = [
             {
                 path: 'Login',
                 component: LoginComponent,
-            },
+            }, 
+           
         ]
     },
     {
