@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import axios from 'axios';
 
 interface notificationfetch {
@@ -19,12 +19,13 @@ interface notificationfetch {
 })
 export class NavbarComponent {
 
+  constructor(private router: Router) {}
+
+
   notification: notificationfetch[] = [];
   sid: any
   booking_id: any
-  // apply_id:any
 
-  constructor() { }
   menu_icon_variable: boolean = false;
   menuVariable: boolean = false;
 
@@ -36,7 +37,7 @@ export class NavbarComponent {
 
     }
     this.notifications();
-    // this.infonotificationd();
+  
   }
 
   notifications() {
@@ -55,25 +56,17 @@ export class NavbarComponent {
   }
 
 
-  // infonotificationd() {
-  //   axios.get(`http://localhost:5000/infonotification/${this.uid}`).then((response) => {
-  //     this.notitificationofinfo = response.data.notitificationofinfo  
-  //   })
-  // }
 
-  // clearinfo(event: any) {
-  //   this.apply_id = event
-  //   axios.patch(`http://localhost:5000/clearnotificationofinfo/${this.apply_id}`).then((response) => {
-  //     this.notifications() 
-  //     // this.infonotificationd() 
-  //   })
-  // }
 
 
 
   openmenu() {
     this.menuVariable = !this.menuVariable;
     this.menu_icon_variable = !this.menu_icon_variable;
+  }
+  logout(){
+    sessionStorage.removeItem('sid');
+    this.router.navigate(['/Guest/Login']);
   }
 }
 

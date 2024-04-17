@@ -5,6 +5,7 @@ import axios from 'axios';
 
 interface categoryinterface {
   categoryname: any;
+  jail_id:any;
 }
 
 interface categoryfetch {
@@ -27,11 +28,13 @@ export class ProductcategoryComponent {
   var: any = ''
   data: categoryfetch[] = [];
   check: number = 0
+  jid:any
 
   onSubmit() {
     console.log(this, this.categoryForm.value.category)
     const categorydata: categoryinterface = {
       categoryname: this.categoryForm.value.category,
+      jail_id:sessionStorage.getItem("jid"),
     };
 
     if (this.check === 0) {
@@ -70,8 +73,15 @@ export class ProductcategoryComponent {
     this.fetchcategory();
   }
   fetchcategory() {
-    axios.get('http://localhost:5000/category/').then((response) => {
-      this.data = response.data.category
+    if (typeof sessionStorage !== 'undefined') {
+
+      this.jid = sessionStorage.getItem('jid');// Access sessionStorage here
+      
+  }
+    axios.get(`http://localhost:5000/category/${this.jid}`).then((response) => {
+      this.data = response.data.jcategory
+      console.log(response.data.jcategory);
+      
     })
 
   }

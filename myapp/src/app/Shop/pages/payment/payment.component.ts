@@ -27,6 +27,8 @@ export class PaymentComponent {
 
   ngOnInit() {
 
+    
+
     this.route.queryParams.subscribe(params => {
       this.bid = params['booking_id']; // Access the 'msg' parameter
       console.log(this.bid);

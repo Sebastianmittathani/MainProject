@@ -83,7 +83,7 @@ export class CentraljailComponent {
       const ownername = this.jailForm.value.jail_username;
 
 
-
+    //password
       if (!password) {
         alert("Password is required.");
         return;

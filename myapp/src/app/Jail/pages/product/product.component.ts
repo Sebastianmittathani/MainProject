@@ -16,10 +16,7 @@ interface categoryfetch {
   category_name: any
 }
 
-// interface jailfetch{
-//   jail_id: any,
-//   jail_name: any,
-// }
+
 
 interface productfetch {
   category_name: any,
@@ -47,6 +44,7 @@ export class ProductComponent {
   catdata: categoryfetch[] = [];
   check: number = 0
   // jaildata:jailfetch[] = []
+  jid:any;
 
 
   productForm = new FormGroup(
@@ -116,7 +114,7 @@ export class ProductComponent {
     axios.get(`http://localhost:5000/updateproduct/${index}`).then((response) => {
 
 
-      // console.log(response.data.place[0].place_name)
+     
 
 
       this.productForm.get('product_name')?.setValue(response.data.product[0].product_name);
@@ -135,13 +133,18 @@ export class ProductComponent {
 
     }
     fetchcategory() {
-      axios.get('http://localhost:5000/category').then((response) => {
+      if (typeof sessionStorage !== 'undefined') {
+
+        this.jid = sessionStorage.getItem('jid');// Access sessionStorage here
+        
+    }
+      axios.get(`http://localhost:5000/category/${this.jid}`).then((response) => {
         // console.log(response.data.category);  
-        this.catdata = response.data.category
+        this.catdata = response.data.jcategory
       })
     }
     fetchproduct() {
-      axios.get('http://localhost:5000/Product').then((response) => {
+      axios.get(`http://localhost:5000/ProductJail/${this.jid}`).then((response) => {
         // console.log(response.data.productdata);
 
         this.productdata = response.data.product

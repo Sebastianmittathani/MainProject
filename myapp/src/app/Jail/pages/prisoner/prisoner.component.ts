@@ -72,6 +72,162 @@ export class PrisonerComponent {
   var: any = ''
   prisionerfetch: any;
   onSubmit() {
+
+    if (this.prisionerForm.valid) {
+      const Name = this.prisionerForm.value.prisioner_name;
+      
+      if (!Name) {
+        alert("Shop name is required.");
+        return;
+      }
+  
+      // Check if the shop name starts with a capital letter
+      const isValidShopName = /^[A-Z][a-zA-Z\s]*$/.test(Name);
+  
+      if (!isValidShopName) {
+        alert("Please enter a prisioner name starting with a capital letter.");
+        return;
+      }
+  
+      // Rest of your code for form submission
+      // ...
+    } else {
+      alert("Please fill out all required fields correctly.");
+    }
+
+    if (this.prisionerForm.valid) {
+      const phoneNumber = this.prisionerForm.value.prisioner_contact;
+      
+      if (!phoneNumber) {
+        alert("Phone number is required.");
+        return;
+      }
+  
+      // Check if the phone number has exactly 10 digits
+      const isValidPhoneNumber = /^\d{10}$/.test(phoneNumber);
+  
+      if (!isValidPhoneNumber) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
+      }
+  
+      // Rest of your code for form submission
+      // ...
+    } else {
+      alert("Please fill out all required fields correctly.");
+    }
+
+    if (this.prisionerForm.valid) {
+      const phoneNumber = this.prisionerForm.value.prisioner_code;
+      
+      if (!phoneNumber) {
+        alert("Prisioner code is required.");
+        return;
+      }
+  
+      // Check if the phone number has exactly 10 digits
+      const isValidPhoneNumber = /^\d{5}$/.test(phoneNumber);
+  
+      if (!isValidPhoneNumber) {
+        alert("Please enter the prisioner code.");
+        return;
+      }
+  
+      // Rest of your code for form submission
+      // ...
+    } else {
+      alert("Please fill out all required fields correctly.");
+    }
+
+    if (this.prisionerForm.valid) {
+      const crime = this.prisionerForm.value.prisioner_crimedetails;
+      
+      if (!crime) {
+        alert("Enter the crime details.");
+        return;
+      }
+  
+      // Check if the shop name starts with a capital letter
+      const isValidShopName = /^[A-Z][a-zA-Z\s]*$/.test(crime);
+  
+      if (!isValidShopName) {
+        alert("Please enter prisioner name the prisioner crime details.");
+        return;
+      }
+  
+      // Rest of your code for form submission
+      // ...
+    } else {
+      alert("Please fill out all required fields correctly.");
+    }
+
+    if (this.prisionerForm.valid) {
+      const prisioner_duration = this.prisionerForm.value.prisioner_duration;
+      
+      if (!prisioner_duration) {
+        alert("Prisoner time period to be prisioned.");
+        return;
+      }
+  
+      // Check if the prisoner code contains only numbers
+      const isValidPrisonerCode = /^\d+$/.test(prisioner_duration);
+  
+      if (!isValidPrisonerCode) {
+        alert("Please Prisoner time period to be prisioned.");
+        return;
+      }
+  
+      // Rest of your code for form submission
+      // ...
+    } else {
+      alert("Please fill out all required fields correctly.");
+    }
+    if (this.prisionerForm.valid) {
+      const dateOfBirth = this.prisionerForm.value.prisioner_joindate;
+      
+      if (!dateOfBirth) {
+        alert("joindate  is required.");
+        return;
+      }
+  
+      // Check if the input value can be parsed as a valid date
+      const isValidDateOfBirth = !isNaN(Date.parse(dateOfBirth));
+  
+      if (!isValidDateOfBirth) {
+        alert("Please enter joindate.");
+        return;
+      }
+  
+      // Rest of your code for form submission
+      // ...
+    } else {
+      alert("Please fill out all required fields correctly.");
+    }
+    if (this.prisionerForm.valid) {
+      const dateOfBirth = this.prisionerForm.value.prisioner_releasedate;
+      
+      if (!dateOfBirth) {
+        alert("releasedate  is required.");
+        return;
+      }
+  
+      // Check if the input value can be parsed as a valid date
+      const isValidDateOfBirth = !isNaN(Date.parse(dateOfBirth));
+  
+      if (!isValidDateOfBirth) {
+        alert("Please enter releasedate.");
+        return;
+      }
+  
+      // Rest of your code for form submission
+      // ...
+    } else {
+      alert("Please fill out all required fields correctly.");
+    }
+
+
+    
+
     console.log(this.prisionerForm.value);
     const prisionerdata: prisonerInterface = {
       prisioner_name: this.prisionerForm.value.prisioner_name,

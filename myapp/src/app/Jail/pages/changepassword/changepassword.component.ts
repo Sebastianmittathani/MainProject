@@ -29,6 +29,61 @@ export class ChangepasswordComponent {
   newuser_password: any;
 
   onSubmit() {
+    if (!this.changeForm.valid) {
+      alert('Fill all the input fields');
+      return;
+    }
+
+    const password = this.changeForm.value.curuser_password;
+    if (!password) {
+      alert('Password is required.');
+      return;
+    }
+    const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+    const isPasswordValid = passwordRegex.test(password);
+
+    if (!isPasswordValid) {
+      alert(
+        'Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.'
+      );
+      return;
+    }
+
+    const newpassword = this.changeForm.value.newuser_password;
+    if (!newpassword) {
+      alert('Password is required.');
+      return;
+    }
+    const newpasswordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+
+    const isnewPasswordValid = newpasswordRegex.test(newpassword);
+
+    if (!isnewPasswordValid) {
+      alert(
+        'Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.'
+      );
+      return;
+    }
+
+    const repassword = this.changeForm.value.reuser_password;
+    if (!repassword) {
+      alert('Password is required.');
+      return;
+    }
+    const repasswordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+
+    const isrePasswordValid = repasswordRegex.test(repassword);
+
+    if (!isrePasswordValid) {
+      alert(
+        'Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.'
+      );
+      return;
+    }
+
     const Formdata: ChangejailPass = {
       newuser_password: this.changeForm.value.newuser_password,
     };
@@ -50,33 +105,37 @@ export class ChangepasswordComponent {
           });
       }
       else {
-        console.log("error");
+        console.log('error in matching newpass');
+        alert('error in matching newpass')
+        return
 
       }
     }
     else {
-      console.log("error");
+      console.log('error not curpass');
+      alert('not current password ')
+      return
 
     }
-    
+
 
   }
   ngOnInit() {
     this.Getpassword();
   }
-  
+
   Getpassword() {
-  
-  
+
+
     if (typeof sessionStorage !== 'undefined') {
       this.jid = sessionStorage.getItem('jid');
     }
-  
-    axios.get(`http://localhost:5000/CentralJail/${this.jid}`).then((response) => {
+
+    axios.get(`http://localhost:5000/getjail/${this.jid}`).then((response) => {
       console.log(response.data.user[0].jail_password)
       this.userpassword = response.data.user[0].jail_password;
     })
-  
+
   }
 }
 

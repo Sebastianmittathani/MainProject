@@ -31,6 +31,8 @@
       </ul>
 
       <ul class="navbar-nav  my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;margin-right: 40px;">
+       
+        
         <div class="btn-group dropstart">
           <a routerLinkActive="active" ariaCurrentwhenActive="page" style="text-decoration: none;color: black;"
             class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,19 +67,29 @@
             </div>
             <div *ngIf="item.booking_status === 2 && item.clear_status === 0">{{item?.jail_name}} rejected your request
               <button style="width: 14rem;border: 0;margin-left: 8px;" (click)="clear(item.booking_id)"> clear </button>
+              
             </div>
+            
 
             
           </div>
+          
 
-          <!-- <div *ngFor="let item of notitificationofinfo">
+        
+          
 
-            <div *ngIf="item.apply_status === 1">Admin has accepted your request</div>
-            <div *ngIf="item.apply_status === 2">Admin has rejected your request</div>
-
-            <button style="width: 14rem;border: 0;margin-left: 8px;" (click)="clearinfo(item.apply_id)"> clear </button>
-          </div> -->
+          
         </ul>
+
+        <a
+        class="nav-link"
+        routerLinkActive="active"
+        ariaCurrentwhenActive="page"
+        (click)="logout()"
+        style="cursor: pointer;"
+        >Logout</a
+        
+      >
       </div>
     </div>
   </div>
