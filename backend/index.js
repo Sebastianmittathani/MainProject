@@ -131,7 +131,7 @@ app.post("/Subcategory", (req, res) => {
   });
 });
 
-//--------------------------------------------------------DISTRICT BEGINS HERE-----------------------------------------------------------//
+//--DISTRICT BEGINS HERE----//
 app.post("/District", (req, res) => {
   const { districtName } = req.body
   let qrySel =

@@ -53,7 +53,7 @@ export class PlaceComponent implements OnInit {
 
     if (this.check === 0) {
       axios.post('http://localhost:5000/Place/', placedata).then((response) => {
-        // console.log(response.data);
+         console.log(response.data);
         alert(response.data.message)
         this.placefetch();
         this.placeForm.reset();
@@ -62,7 +62,7 @@ export class PlaceComponent implements OnInit {
     }
     else {
       axios.patch(`http://localhost:5000/Place/${this.check}`, placedata).then((response) => {
-        // console.log(response.data);
+         console.log(response.data);
         alert(response.data.message)
         this.placefetch();
         this.placeForm.reset();
