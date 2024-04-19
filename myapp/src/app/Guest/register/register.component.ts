@@ -90,6 +90,7 @@ export class RegisterComponent {
       const number = this.shopForm.value.shop_contact;
       const email = this.shopForm.value.shop_email;
       const ownername = this.shopForm.value.shop_ownername;
+      const username = this.shopForm.value.shop_licenseproof;
 
 
 
@@ -103,6 +104,23 @@ export class RegisterComponent {
 
       if (!isPasswordValid) {
         alert("Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+        return;
+      }
+
+      // Check if the input is empty
+      if (!username) {
+        alert("Input is required.");
+        return;
+      }
+
+      // Extract the first word from the input
+      const Word = username.trim().split(/\s+/)[0];
+
+      // Check if the first word starts with a capital letter
+      const isCapitalized = /^[A-Z].*/.test(Word);
+
+      if (!isCapitalized) {
+        alert("The first word must start with a capital letter.");
         return;
       }
 

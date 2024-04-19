@@ -52,11 +52,12 @@
             aria-describedby="addon-wrapping" formControlName="shop_email" required>
         </div>
         <div class="input-group mb-3">
+          <span class="input-group-text" id="addon-wrapping">Shop Image</span>
           <input type="file" aria-label="First name" class="form-control " formControlName="shop_logo" (change)="handleFile($event)" 
            placeholder="upload photo">
         </div>
         <div class="input-group flex-nowrap">
-          <span class="input-group-text" id="addon-wrapping">licens Proof</span>
+          <span class="input-group-text" id="addon-wrapping">Usrname</span>
           <input type="text" class="form-control" placeholder="" aria-label="Username"
             aria-describedby="addon-wrapping" formControlName="shop_licenseproof">
         </div>
